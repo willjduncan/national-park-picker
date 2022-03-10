@@ -22,4 +22,19 @@ var getNatParkInfo = function() {
 };
 
 
+//Slideshow of NP photos
+$(document).ready(function(){
+    $('.slider').slider({
+        full_width: true,
+        height : 500,
+        interval: 8000
+    });
+  });
+  $(document).ready(function(){
+
+
+});
+
+
+
 getNatParkInfo();

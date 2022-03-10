@@ -1,15 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <title>National Park Picker</title>
 </head>
+
 <body>
     <header>
-        <h1 a href="/">National Park Picker</h1>
+        <!-- <h1 a href="/">National Park Picker</h1> -->
+
+        <div class="navbar-fixed">
+            <nav>
+              <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">Logo</a>
+                <ul class="right hide-on-med-and-down">
+                  <li><a href="sass.html">Sass</a></li>
+                  <li><a href="badges.html">Components</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+
+        <!-- Slideshow of NP photos -->
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="https://wallpapercave.com/wp/wp4738979.jpg">
+                    <div class="caption center-align">
+                        <h3>This is our big Tagline!</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://wallpapercave.com/wp/wp4738993.jpg">
+                    <div class="caption left-align">
+                        <h3>Left Aligned Caption</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://wallpapercave.com/wp/wp3899205.jpg">
+                    <div class="caption right-align">
+                        <h3>Right Aligned Caption</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://wallpapercave.com/wp/wp4738978.jpg">
+                    <div class="caption center-align">
+                        <h3>This is our big Tagline!</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+
         <nav>
             <ul>
                 <li></li>
@@ -22,8 +77,11 @@
     <div id="results"></div>
     <div id="other-info"></div>
     <div id="footer"></div>
-    <div></div>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>    
+    <div></div>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/homepage.js"></script>
 </body>
+
 </html>
