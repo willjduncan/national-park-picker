@@ -1,5 +1,5 @@
-.nav-transparent {
-    background-color: rgba(0, 145, 234, 0) !important ;
+.nav-transparent{
+    background-color: rgba(0, 145, 234, 0.2) !important ;
 }
 
 .slider,
@@ -8,3 +8,10 @@
     top: -32px;
 }
 
+.result {
+    aspect-ratio: 2 /1;
+}
+
+.page-footer {
+    background-color: rgba(0, 145, 234, 1) !important ;
+}
