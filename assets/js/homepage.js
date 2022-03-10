@@ -309,6 +309,7 @@ var displayNatParkInfo = function(data) {
     console.log(data.data[0].operatingHours[0].standardHours);
     var hours = data.data[0].operatingHours[0].standardHours;
     for (var i =0; i<hours.length;i++) {
+
     }
 
 
