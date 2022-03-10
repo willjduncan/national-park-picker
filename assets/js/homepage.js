@@ -279,6 +279,9 @@ var getNatParkInfo = function(code) {
 };
 
 var displayNatParkInfo = function (data) {
+    while (resultsEl.firstChild) {
+        resultsEl.removeChild(resultsEl.firstChild);
+    }
     console.log(data);
     //Display National Park name as a title
     var name = data.data[0].fullName;
@@ -361,7 +364,7 @@ $(document).ready(function () {
             "Biscayne": null,
             "Black Canyon of the Gunnison": null,
             "Bryce Canyon": null,
-            "Cabrillo": null,
+            // "Cabrillo": null,
             "Canyonlands": null,
             "Capitol Reef": null,
             "Carlsbad Caverns": null,
@@ -374,7 +377,7 @@ $(document).ready(function () {
             "Dry Tortugas": null,
             "Everglades": null,
             "Gates of the Arctic": null,
-            "Gettysburg National Military Park": null,
+            // "Gettysburg National Military Park": null,
             "Glacier": null,
             "Glacier Bay": null,
             "Grand Canyon": null,
@@ -385,7 +388,7 @@ $(document).ready(function () {
             "Guadalupe Mountains": null,
             "Haleakala": null,
             "Hawai’i Volcanoes": null,
-            "Harpers Ferry": null,
+            // "Harpers Ferry": null,
             "Hot Springs": null,
             "Isle Royale": null,
             "Joshua Tree": null,
@@ -399,7 +402,7 @@ $(document).ready(function () {
             "Mesa Verde": null,
             "Mount Rainier": null,
             "North Cascades": null,
-            "Organ Pipe Cactus": null,
+            // "Organ Pipe Cactus": null,
             "Olympic": null,
             "Petrified Forest": null,
             "Pinnacles": null,
@@ -409,7 +412,7 @@ $(document).ready(function () {
             "Sequoia": null,
             "Shenandoah": null,
             "Theodore Roosevelt": null,
-            "Valley Forge": null,
+            // "Valley Forge": null,
             "Virgin Islands": null,
             "Voyageurs": null,
             "Wind Cave": null,
