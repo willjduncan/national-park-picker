@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
@@ -13,12 +14,11 @@
 
 <body>
   <header>
-    <!-- <h1 a href="/">National Park Picker</h1> -->
-
-    <div class="navbar-fixed">
-      <nav>
+    <!-- Nav bar -->
+    <div class="navbar-fixed nav-transparent">
+      <nav class="nav-transparent">
         <div class="nav-wrapper">
-          <a href="#!" class="brand-logo">Logo</a>
+          <a href="#!" class="brand-logo">National Park Picker</a>
           <ul class="right hide-on-med-and-down">
             <li><a href="sass.html">Sass</a></li>
             <li><a href="badges.html">Components</a></li>
@@ -62,12 +62,30 @@
     </div>
 
   </header>
-  <div class="row">
+
+<!-- Input-search NP form -->
+
+<div class="row">
+  <div class="col s4">
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">chevron_right</i>
+        <input type="text" id="autocomplete-input" class="autocomplete">
+        <label for="autocomplete-input">Enter name of the National Park</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- <div class="row">
     <div class="col s3" id="input">
 
     </div>
     <div class="col s9" id="results"></div>
-  </div>
+  </div> -->
 
 
   <div></div>
@@ -96,6 +114,7 @@
     </div>
   </footer>
 
+  <script type="text/javascript" src="js/materialize.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="./assets/js/homepage.js"></script>

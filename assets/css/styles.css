@@ -1,0 +1,10 @@
+.nav-transparent {
+    background-color: rgba(0, 145, 234, 0) !important ;
+}
+
+.slider,
+.slides{
+    position: relative;
+    top: -32px;
+}
+
