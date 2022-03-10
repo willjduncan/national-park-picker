@@ -332,8 +332,6 @@ var formSubmitHandler = function(event) {
     }
 };
 
-searchBtnEl.addEventListener("click", formSubmitHandler);
-// getNatParkInfo();
 
 //Slideshow of NP photos
 $(document).ready(function () {
@@ -344,13 +342,13 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-
-
+    
+    
 });
 
 // Input-search NP form
 $(document).ready(function () {
-    $('input.autocomplete').autocomplete({
+    $('input#park-name').autocomplete({
         data: {
             "Denali": null,
             "Gates of the Arctic": null,
@@ -423,4 +421,4 @@ $(document).ready(function () {
     });
 });
 
-getNatParkInfo();
+searchBtnEl.addEventListener("click", formSubmitHandler);
