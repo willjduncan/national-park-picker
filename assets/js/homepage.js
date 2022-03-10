@@ -1,5 +1,7 @@
 const apiKeyNatPark = "XeD3ty79NiWNMwuU7DVhQM9fye0L5RspxNkmYSXe";
 var resultsEl = document.querySelector("#results");
+var searchBtnEl = document.querySelector("#search");
+var nameInputEl = document.querySelector("#park-name");
 //codes
 var parks = [
     {
@@ -257,8 +259,8 @@ var parks = [
 ]
 
 
-var getNatParkInfo = function() {
-    var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=" + apiKeyNatPark;
+var getNatParkInfo = function(code) {
+    var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     fetch(natParkUrl)
         .then(function(response) {
             // request was successful
@@ -311,10 +313,24 @@ var displayNatParkInfo = function(data) {
     for (var i =0; i<hours.length;i++) {
 
     }
-
-
     
 }
 
+//TO HANDLE THE CITY SUBMISSION BUTTON
+var formSubmitHandler = function(event) {
+    event.preventDefault();
+    // get value from input element
+    var submission = nameInputEl.value.trim();
+    var park = parks.find(park => park.name === submission);
+    console.log(park);
+   //If the user wrote a park, empty the input section and get the city's coordinates
+    if (submission) {
+    getNatParkInfo(park.code);
+    nameInputEl.value = "";
+    } else {
+    alert("Please enter a National Park.");
+    }
+};
 
-getNatParkInfo();
+searchBtnEl.addEventListener("click", formSubmitHandler);
+// getNatParkInfo();
