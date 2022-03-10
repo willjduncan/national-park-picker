@@ -304,17 +304,37 @@ var displayNatParkInfo = function (data) {
     addressTitleEl.textContent = "Address: ";
     addressTitleEl.setAttribute("style", "font-weight:bold;");
     var addressEl = document.createElement("span");
-    addressEl.textContent = line1 + ", " + line2 + ", " + city + ", " + state + " " + zip;
+    if (!line2) {
+        addressEl.textContent = line1 + ", " + city + ", " + state + " " + zip; 
+    } else {
+        addressEl.textContent = line1 + ", " + line2 + ", " + city + ", " + state + " " + zip;
+    }
     addressEl.setAttribute("style", "font-style:italic;");
     var allAddressEl = document.createElement("p");
     allAddressEl.append(addressTitleEl);
     allAddressEl.append(addressEl);
     resultsEl.append(allAddressEl);
-    //display hours of operation
-    console.log(data.data[0].operatingHours[0].standardHours);
-    var hours = data.data[0].operatingHours[0].standardHours;
-    for (var i =0; i<hours.length;i++) {
+    //display directions
+    var directions = data.data[0].directionsInfo;
+    var directionsEl = document.createElement("p");
+    directionsEl.textContent= directions;
+    resultsEl.append(directionsEl);
 
+
+
+
+    //display hours of operation
+    // console.log(data.data[0].operatingHours[0].standardHours);
+    // var hours = data.data[0].operatingHours[0].standardHours;
+    // for (var i =0; i<hours.length;i++) {
+    //     console.log("ok");
+    // }
+    //display new pictures
+    console.log(data.data[0].images);
+    var images = data.data[0].images;
+    for (var i =0; i<4;i++) {
+        var index = ("img" + i);  
+        document.getElementById(index).src = images[i].url;
     }
     
 }
