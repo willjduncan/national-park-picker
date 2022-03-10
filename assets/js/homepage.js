@@ -11,6 +11,7 @@ var getNatParkInfo = function() {
             if (response.ok) {
                 response.json().then(function(data) {
                 console.log(data);
+                displayNatParkInfo(data);
             });
             } else {
                 alert('Error: National Park Not Found');
@@ -21,5 +22,8 @@ var getNatParkInfo = function() {
     });
 };
 
+var displayNatParkInfo = function(data) {
+    console.log(data);
+}
 
 getNatParkInfo();
