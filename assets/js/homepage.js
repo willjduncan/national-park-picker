@@ -2,7 +2,9 @@ const apiKeyNatPark = "XeD3ty79NiWNMwuU7DVhQM9fye0L5RspxNkmYSXe";
 var resultsEl = document.querySelector("#results");
 var searchBtnEl = document.querySelector("#search");
 var nameInputEl = document.querySelector("#park-name");
-//codes
+var alertsEl = document.querySelector("#alerts");
+var activitiesEl = document.querySelector("#activities");
+//park codes
 var parks = [
     {
     "name" : "Gateway Arch",
@@ -257,8 +259,21 @@ var parks = [
     "code" : "neri"
     }
 ]
+// END ARRAY OF PARK CODES
 
+var clearItems = function(){
+    while (resultsEl.firstChild) {
+        resultsEl.removeChild(resultsEl.firstChild);
+    };
+    while (alertsEl.firstChild) {
+        alertsEl.removeChild(alertsEl.firstChild);
+    };
+    while (activitiesEl.firstChild) {
+        activitiesEl.removeChild(activitiesEl.firstChild);
+    };
+};
 
+//BEGIN FETCH AND DISPLAY FOR BASIC NAT PARK INFO
 var getNatParkInfo = function(code) {
     var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     fetch(natParkUrl)
@@ -266,7 +281,6 @@ var getNatParkInfo = function(code) {
             // request was successful
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log(data);
                     displayNatParkInfo(data);
                 });
             } else {
@@ -279,9 +293,7 @@ var getNatParkInfo = function(code) {
 };
 
 var displayNatParkInfo = function (data) {
-    while (resultsEl.firstChild) {
-        resultsEl.removeChild(resultsEl.firstChild);
-    }
+    console.log("BASIC INFO: " );
     console.log(data);
     //Display National Park name as a title
     var name = data.data[0].fullName;
@@ -294,7 +306,6 @@ var displayNatParkInfo = function (data) {
     descriptionEl.textContent = description;
     resultsEl.append(descriptionEl);
     //display address
-    console.log(data.data[0].addresses[0]);
     var line1 = data.data[0].addresses[0].line1;
     var line2 = data.data[0].addresses[0].line2;
     var city = data.data[0].addresses[0].city;
@@ -320,9 +331,6 @@ var displayNatParkInfo = function (data) {
     directionsEl.textContent= directions;
     resultsEl.append(directionsEl);
 
-
-
-
     //display hours of operation
     // console.log(data.data[0].operatingHours[0].standardHours);
     // var hours = data.data[0].operatingHours[0].standardHours;
@@ -330,6 +338,7 @@ var displayNatParkInfo = function (data) {
     //     console.log("ok");
     // }
     //display new pictures
+    console.log("IMAGES: " );
     console.log(data.data[0].images);
     var images = data.data[0].images;
     for (var i =0; i<4;i++) {
@@ -338,17 +347,103 @@ var displayNatParkInfo = function (data) {
     }
     
 }
+//END FETCH AND DISPLAY OF BASIC PARK INFO 
 
-//TO HANDLE THE CITY SUBMISSION BUTTON
+// BEGIN FETCH AND DISPLAY OF PARK ALERTS
+var getNatParkAlerts = function(code) {
+    var natParkUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    fetch(natParkUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json().then(function (data) {
+                    displayNatParkAlerts(data);
+                });
+            } else {
+                alert('Error: National Park Not Found');
+            }
+        })
+        .catch(function (error) {
+            alert("Unable to connect to National Park API");
+        });
+};
+
+var displayNatParkAlerts = function (data) {
+    // console.log(data);
+    var alertArr = data.data;
+    for (var i=0; i<alertArr.length;i++) {
+        var alertTitle = alertArr[i].title;
+        var alertTitleEl = document.createElement("p");
+        alertTitleEl.textContent = "ALERT: " + alertTitle;
+        alertTitleEl.setAttribute("style", "color: red");
+        alertsEl.append(alertTitleEl);
+    }
+}
+//END FETCH AND DISPLAY OF NAT PARK ALERTS
+
+//BEGIN FETCH AND DISPLAY OF THINGS TO DO
+var getNatParkToDos = function(code) {
+    console.log("fetch ToDo");
+    var natParkUrl = "https://developer.nps.gov/api/v1/thingstodo?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    fetch(natParkUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log("fetched toDo")
+                    displayNatParkToDos(data);
+                });
+            } else {
+                alert('Error: National Park Not Found');
+            }
+        })
+        .catch(function (error) {
+            alert("Unable to connect to National Park API");
+        });
+};
+
+var displayNatParkToDos = function (data) {
+    console.log("TO DOS: " );
+    console.log(data);
+    var toDoArr = data.data;
+    var toDoEl = document.createElement("h2");
+    if (!toDoArr[0]) {
+        toDoEl.textContent = "No Activities Listed"  
+    } else {
+        toDoEl.textContent = "Activities"
+    }
+    activitiesEl.append(toDoEl);
+    for (var i=0; i<toDoArr.length;i++) {
+        var toDoTitle = toDoArr[i].title;
+        var toDoTitleEl = document.createElement("h5");
+        toDoTitleEl.textContent= toDoTitle;
+        var toDoDesc = toDoArr[i].shortDescription;
+        console.log(toDoArr[i].seasonDescription);
+        var seasonDescEl = document.createElement("p");
+        $(seasonDescEl).html(toDoArr[i].seasonDescription);
+        var toDoDescEl = document.createElement("p");
+        toDoDescEl.textContent= toDoDesc;
+        toDoDescEl.append(seasonDescEl);
+        activitiesEl.append(toDoTitleEl);
+        activitiesEl.append(toDoDescEl);
+    }
+}
+
+
+
+//TO HANDLE THE PARK SUBMISSION BUTTON
 var formSubmitHandler = function(event) {
     event.preventDefault();
     // get value from input element
     var submission = nameInputEl.value.trim();
     var park = parks.find(park => park.name === submission);
     console.log(park);
-   //If the user wrote a park, empty the input section and get the city's coordinates
+   //If the user wrote a park, empty the input section and get the nat park info
     if (submission) {
+    clearItems();
     getNatParkInfo(park.code);
+    getNatParkAlerts (park.code);
+    getNatParkToDos (park.code);
     nameInputEl.value = "";
     } else {
     alert("Please enter a National Park.");
