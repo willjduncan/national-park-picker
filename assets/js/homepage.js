@@ -558,6 +558,7 @@ $(document).ready(function () {
             "Dry Tortugas": null,
             "Everglades": null,
             "Gates of the Arctic": null,
+            "Gateway Arch": null,
             // "Gettysburg National Military Park": null,
             "Glacier": null,
             "Glacier Bay": null,
