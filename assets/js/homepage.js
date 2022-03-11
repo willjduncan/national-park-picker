@@ -334,13 +334,6 @@ var displayNatParkInfo = function (data) {
     var directionsEl = document.createElement("p");
     directionsEl.textContent= directions;
     resultsEl.append(directionsEl);
-
-    //display hours of operation
-    // console.log(data.data[0].operatingHours[0].standardHours);
-    // var hours = data.data[0].operatingHours[0].standardHours;
-    // for (var i =0; i<hours.length;i++) {
-    //     console.log("ok");
-    // }
     //display new pictures
     console.log("IMAGES: " );
     console.log(data.data[0].images);
@@ -412,6 +405,7 @@ var displayNatParkToDos = function (data) {
     if (!toDoArr[0]) {
         toDoEl.textContent = "No Recommended Activities";  
     } else {
+        //Add a photo of the first activity to the page
         toDoEl.textContent = "Recommended Activities";
         var imgEl = document.createElement("img");
         imgEl.src = toDoArr[0].images[0].url;
@@ -421,23 +415,28 @@ var displayNatParkToDos = function (data) {
         toDoEl.append(imgEl);
     }
     activitiesEl.append(toDoEl);
+    //get title, duration, description, and season description
     for (var i=0; i<toDoArr.length;i++) {
+        //get activity title
         var toDoTitle = toDoArr[i].title;
         var toDoTitleEl = document.createElement("h5");
         toDoTitleEl.textContent= toDoTitle + " ";
+        //if there is a duration mentioned in the data, append it to the end of the activity title
         var toDoLengthEl = document.createElement("span");
         if (toDoArr[i].duration) {
             toDoLengthEl.textContent = " Duration: " + toDoArr[i].duration;
             toDoLengthEl.setAttribute ("style", "font-weight:bold; font-size:.65em");
             toDoTitleEl.append(toDoLengthEl);
         }
+        //add the short description
         var toDoDesc = toDoArr[i].shortDescription;
-        console.log(toDoArr[i].seasonDescription);
-        var seasonDescEl = document.createElement("p");
-        $(seasonDescEl).html(toDoArr[i].seasonDescription);
         var toDoDescEl = document.createElement("p");
         toDoDescEl.textContent= toDoDesc;
+        //add season description
+        var seasonDescEl = document.createElement("p");
+        $(seasonDescEl).html(toDoArr[i].seasonDescription);
         toDoDescEl.append(seasonDescEl);
+        //append to page
         activitiesEl.append(toDoTitleEl);
         activitiesEl.append(toDoDescEl);
     }
@@ -476,8 +475,10 @@ var displayNatParkTours = function (data) {
     toursEl.append(toursTitleEl);
     //get title, duration, durationUnit, description, 
     for (var i=0; i < toursArr.length; i++) {
+        //get tour title
         var tourNameEl = document.createElement("h5");
         tourNameEl.textContent = toursArr[i].title + " ";
+        //append duration to the tour title
         var tourLengthEl = document.createElement("span");
         if (toursArr[i].durationUnit === "m") {
             tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " minutes";
@@ -488,8 +489,10 @@ var displayNatParkTours = function (data) {
         }
         tourLengthEl.setAttribute ("style", "font-weight:bold; font-size:.65em");
         tourNameEl.append(tourLengthEl);
+        //get tour description
         var tourDescEl = document.createElement("p");
         tourDescEl.textContent = toursArr[i].description;
+        //append to the page
         toursEl.append(tourNameEl);
         toursEl.append(tourDescEl);
     }
@@ -502,7 +505,7 @@ var formSubmitHandler = function(event) {
     // get value from input element
     var submission = nameInputEl.value.trim();
     var park = parks.find(park => park.name === submission);
-    console.log(park);
+    console.log(park.name);
    //If the user wrote a park, empty the input section and get the nat park info
     if (submission) {
     clearItems();
