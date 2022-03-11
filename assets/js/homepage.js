@@ -4,6 +4,7 @@ var searchBtnEl = document.querySelector("#search");
 var nameInputEl = document.querySelector("#park-name");
 var alertsEl = document.querySelector("#alerts");
 var activitiesEl = document.querySelector("#activities");
+var toursEl = document.querySelector("#tours");
 //park codes
 var parks = [
     {
@@ -271,6 +272,9 @@ var clearItems = function(){
     while (activitiesEl.firstChild) {
         activitiesEl.removeChild(activitiesEl.firstChild);
     };
+    while (toursEl.firstChild) {
+        toursEl.removeChild(toursEl.firstChild);
+    };
 };
 
 //BEGIN FETCH AND DISPLAY FOR BASIC NAT PARK INFO
@@ -383,14 +387,12 @@ var displayNatParkAlerts = function (data) {
 
 //BEGIN FETCH AND DISPLAY OF THINGS TO DO
 var getNatParkToDos = function(code) {
-    console.log("fetch ToDo");
     var natParkUrl = "https://developer.nps.gov/api/v1/thingstodo?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     fetch(natParkUrl)
         .then(function (response) {
             // request was successful
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log("fetched toDo")
                     displayNatParkToDos(data);
                 });
             } else {
@@ -406,17 +408,29 @@ var displayNatParkToDos = function (data) {
     console.log("TO DOS: " );
     console.log(data);
     var toDoArr = data.data;
-    var toDoEl = document.createElement("h2");
+    var toDoEl = document.createElement("h3");
     if (!toDoArr[0]) {
-        toDoEl.textContent = "No Activities Listed"  
+        toDoEl.textContent = "No Recommended Activities";  
     } else {
-        toDoEl.textContent = "Activities"
+        toDoEl.textContent = "Recommended Activities";
+        var imgEl = document.createElement("img");
+        imgEl.src = toDoArr[0].images[0].url;
+        imgEl.alt = toDoArr[0].images[0].altText;
+        imgEl.setAttribute("style", "display:block; width:auto; height:450px")
+        toDoEl.setAttribute("style", "text-decoration:underline");
+        toDoEl.append(imgEl);
     }
     activitiesEl.append(toDoEl);
     for (var i=0; i<toDoArr.length;i++) {
         var toDoTitle = toDoArr[i].title;
         var toDoTitleEl = document.createElement("h5");
-        toDoTitleEl.textContent= toDoTitle;
+        toDoTitleEl.textContent= toDoTitle + " ";
+        var toDoLengthEl = document.createElement("span");
+        if (toDoArr[i].duration) {
+            toDoLengthEl.textContent = " Duration: " + toDoArr[i].duration;
+            toDoLengthEl.setAttribute ("style", "font-weight:bold; font-size:.65em");
+            toDoTitleEl.append(toDoLengthEl);
+        }
         var toDoDesc = toDoArr[i].shortDescription;
         console.log(toDoArr[i].seasonDescription);
         var seasonDescEl = document.createElement("p");
@@ -428,8 +442,59 @@ var displayNatParkToDos = function (data) {
         activitiesEl.append(toDoDescEl);
     }
 }
+//END FETCH AND DISPLAY OF THINGS TO DO
 
+//BEGIN FETCH AND DISPLAY OF TOURS
+var getNatParkTours = function(code) {
+    var natParkUrl = "https://developer.nps.gov/api/v1/tours?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    fetch(natParkUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json().then(function (data) {
+                    displayNatParkTours(data);
+                });
+            } else {
+                alert('Error: National Park Not Found');
+            }
+        })
+        .catch(function (error) {
+            alert("Unable to connect to National Park API");
+        });
+};
 
+var displayNatParkTours = function (data) {
+    console.log("TOURS: " );
+    console.log(data);
+    var toursArr = data.data;
+    var toursTitleEl = document.createElement("h3");
+    if (!toursArr[0]) {
+        toursTitleEl.textContent = "No Tours Available";  
+    } else {
+        toursTitleEl.textContent = "Tours";
+    }
+    toursEl.append(toursTitleEl);
+    //get title, duration, durationUnit, description, 
+    for (var i=0; i < toursArr.length; i++) {
+        var tourNameEl = document.createElement("h5");
+        tourNameEl.textContent = toursArr[i].title + " ";
+        var tourLengthEl = document.createElement("span");
+        if (toursArr[i].durationUnit === "m") {
+            tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " minutes";
+        } else if (toursArr[i].durationUnit === "h") {
+            tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " hours";
+        } else {
+            tourLengthEl.textContent = " Duration Unspecified";
+        }
+        tourLengthEl.setAttribute ("style", "font-weight:bold; font-size:.65em");
+        tourNameEl.append(tourLengthEl);
+        var tourDescEl = document.createElement("p");
+        tourDescEl.textContent = toursArr[i].description;
+        toursEl.append(tourNameEl);
+        toursEl.append(tourDescEl);
+    }
+}
+//END FETCH AND DISPLAY OF TOURS
 
 //TO HANDLE THE PARK SUBMISSION BUTTON
 var formSubmitHandler = function(event) {
@@ -444,6 +509,7 @@ var formSubmitHandler = function(event) {
     getNatParkInfo(park.code);
     getNatParkAlerts (park.code);
     getNatParkToDos (park.code);
+    getNatParkTours(park.code);
     nameInputEl.value = "";
     } else {
     alert("Please enter a National Park.");
