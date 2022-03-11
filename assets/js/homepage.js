@@ -2,6 +2,7 @@ const apiKeyNatPark = "XeD3ty79NiWNMwuU7DVhQM9fye0L5RspxNkmYSXe";
 var resultsEl = document.querySelector("#results");
 var searchBtnEl = document.querySelector("#search");
 var nameInputEl = document.querySelector("#park-name");
+var alertsEl = document.querySelector("#alerts");
 //codes
 var parks = [
     {
@@ -320,9 +321,6 @@ var displayNatParkInfo = function (data) {
     directionsEl.textContent= directions;
     resultsEl.append(directionsEl);
 
-
-
-
     //display hours of operation
     // console.log(data.data[0].operatingHours[0].standardHours);
     // var hours = data.data[0].operatingHours[0].standardHours;
@@ -339,16 +337,53 @@ var displayNatParkInfo = function (data) {
     
 }
 
-//TO HANDLE THE CITY SUBMISSION BUTTON
+
+var getNatParkAlerts = function(code) {
+    var natParkUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    fetch(natParkUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data);
+                    displayNatParkAlerts(data);
+                });
+            } else {
+                alert('Error: National Park Not Found');
+            }
+        })
+        .catch(function (error) {
+            alert("Unable to connect to National Park API");
+        });
+};
+
+var displayNatParkAlerts = function (data) {
+    while (alertsEl.firstChild) {
+        alertsEl.removeChild(alertsEl.firstChild);
+    }
+    console.log(data);
+    var alertArr = data.data;
+    for (var i=0; i<alertArr.length;i++) {
+        var alertTitle = alertArr[i].title;
+        var alertTitleEl = document.createElement("p");
+        alertTitleEl.textContent = "ALERT: " + alertTitle;
+        alertTitleEl.setAttribute("style", "color: red");
+        alertsEl.append(alertTitleEl);
+    }
+}
+
+
+//TO HANDLE THE PARK SUBMISSION BUTTON
 var formSubmitHandler = function(event) {
     event.preventDefault();
     // get value from input element
     var submission = nameInputEl.value.trim();
     var park = parks.find(park => park.name === submission);
     console.log(park);
-   //If the user wrote a park, empty the input section and get the city's coordinates
+   //If the user wrote a park, empty the input section and get the nat park info
     if (submission) {
     getNatParkInfo(park.code);
+    getNatParkAlerts (park.code);
     nameInputEl.value = "";
     } else {
     alert("Please enter a National Park.");
