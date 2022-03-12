@@ -356,6 +356,19 @@ var displayNatParkInfo = function (data) {
         var indexD = ("descr" + i);
         document.getElementById(indexD).textContent = images[i].caption;
     }
+    //replace links in the footer for nps, rec.gov, and npmaps to reflect the searched park
+    var newUrl = data.data[0].url;
+    $("#nat-park-site").attr("href", newUrl);
+    var parkName = $("#results").find("h2").text();
+    $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
+    var parkSearchArr = parkName.split(" National Park");
+    var parkSearchCode = parkSearchArr[0];
+    parkSearchCode = parkSearchCode.toLowerCase();
+    parkSearchCode = parkSearchCode.replaceAll(" ", "-");
+    $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
+    console.log(parkSearchCode);
+
+    // $("#nat-park-site").attr("href", newUrl);
 
 
 }
