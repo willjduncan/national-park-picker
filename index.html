@@ -75,12 +75,37 @@
           <button type="submit" class="btn-search third" id="search">Search</button>
           <label for="autocomplete-input">Enter name of the National Park</label>
         </div>
+        <div class="col s12">
+          <ul class = "store-high hide list-header">High Priority Parks</ul>
+          <ul class = "store-med hide list-header">Medium Priority Parks</ul>
+          <ul class = "store-low hide list-header">Low Priority Parks</ul>
+        </div>
       </div>
     </div>
 
     <!-- alerts -->
     <div class="col s9" id="alerts"></div>
-    
+    <div class="col s9" id="add-park"></div>
+    <div class="choices hide">
+      <div>
+        <input type="radio" class="radio-btn" id="high-p" name="priority" value="High Priority"
+              checked>
+        <label for="high-p">High Priority</label>
+      </div>
+      
+      <div>
+        <input type="radio" class="radio-btn" id="med-p" name="priority" value="Medium Priority">
+        <label for="med-p">Medium Priority</label>
+      </div>
+      
+      <div>
+        <input type="radio" class="radio-btn" id="low-p" name="priority" value="Low Priority">
+        <label for="low-p">Low Priority</label>
+      </div>
+      <input type="button" class="radio-btn" id="check" name="check" value = "Add Park">
+  </div>
+
+
     <!-- Results shows here -->
     <div class="col s9" id="results">
       <div class="row cardConteiner">

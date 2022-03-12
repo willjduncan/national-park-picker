@@ -5,6 +5,10 @@ var nameInputEl = document.querySelector("#park-name");
 var alertsEl = document.querySelector("#alerts");
 var activitiesEl = document.querySelector("#activities");
 var toursEl = document.querySelector("#tours");
+var addParkEl = document.querySelector("#add-park");
+var storeHighEl = document.querySelector(".store-high");
+var storeMedEl = document.querySelector(".store-med");
+var storeLowEl = document.querySelector(".store-low");
 //park codes
 var parks = [
     {
@@ -275,6 +279,9 @@ var clearItems = function () {
     while (toursEl.firstChild) {
         toursEl.removeChild(toursEl.firstChild);
     };
+    while (addParkEl.firstChild) {
+        addParkEl.removeChild(addParkEl.firstChild);
+    };
 };
 
 //BEGIN FETCH AND DISPLAY FOR BASIC NAT PARK INFO
@@ -509,6 +516,11 @@ var displayNatParkTours = function (data) {
 }
 //END FETCH AND DISPLAY OF TOURS
 
+var addParkPrompt = function(submission) {
+    addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?"
+    $(".choices").removeClass("hide");
+}
+
 //TO HANDLE THE PARK SUBMISSION BUTTON
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -518,12 +530,13 @@ var formSubmitHandler = function (event) {
     console.log(park.name);
     //If the user wrote a park, empty the input section and get the nat park info
     if (submission) {
-        clearItems();
-        getNatParkInfo(park.code);
-        getNatParkAlerts(park.code);
-        getNatParkToDos(park.code);
-        getNatParkTours(park.code);
-        nameInputEl.value = "";
+    clearItems();
+    getNatParkInfo(park.code);
+    getNatParkAlerts (park.code);
+    getNatParkToDos (park.code);
+    getNatParkTours(park.code);
+    addParkPrompt(submission);
+    nameInputEl.value = "";
     } else {
         alert("Please enter a National Park.");
     }
@@ -669,3 +682,53 @@ var createCards = function () {
 createCards();
 
 searchBtnEl.addEventListener("click", formSubmitHandler);
+$("#check").click(function(){
+    var parkName = $("#results").find("h2").text();
+    var priority = $('input[name=priority]:checked', '.choices').val()
+    console.log(parkName);
+    console.log(priority);
+    localStorage.setItem(parkName, JSON.stringify(priority));
+    loadParks();
+    // localStorage.setItem
+        
+});
+
+var loadParks = function(){
+    while (storeHighEl.firstChild) {
+        storeHighEl.removeChild(storeHighEl.firstChild);
+    };
+    storeHighEl.textContent= "High Priority Parks";
+    while (storeMedEl.firstChild) {
+        storeMedEl.removeChild(storeMedEl.firstChild);
+    };
+    storeMedEl.textContent= "Medium Priority Parks";
+    while (storeLowEl.firstChild) {
+        storeLowEl.removeChild(storeLowEl.firstChild);
+    };
+    storeLowEl.textContent= "Low Priority Parks";
+    for (var i=0; i<localStorage.length;i++) {
+        if (localStorage.key(i).match("National Park")) {
+            // console.log(localStorage.key(i));
+            var storedPark = localStorage.key(i);
+            var storedParkEl = document.createElement("li");
+            storedParkEl.textContent = storedPark;
+            var storedPriority = JSON.parse(localStorage.getItem(storedPark));
+            // console.log(storedPriority);
+            if (storedPriority === "High Priority") {
+                $(".store-high").removeClass("hide");
+                storeHighEl.append(storedParkEl);
+            }else if (storedPriority === "Medium Priority") {
+                $(".store-med").removeClass("hide");
+                storeMedEl.append(storedParkEl);
+            }else if (storedPriority === "Low Priority") {
+                $(".store-low").removeClass("hide");
+                storeLowEl.append(storedParkEl);
+            }
+        }
+    }
+    $(".list-header li").addClass("list-item");
+}
+
+searchBtnEl.addEventListener("click", formSubmitHandler);
+loadParks();
+

@@ -90,3 +90,25 @@
   margin-right: 3%;
 }
 
+/* 
+  .hide {
+      visibility: hidden;
+  } */
+  .show {
+      visibility: visible;
+  }
+  .radio-btn:checked, .radio-btn:not(:checked) {
+      position: relative;
+      opacity: 1;
+      pointer-events: auto;
+  }
+  .list-header {
+      font-size: 1.25em;
+      font-weight: bold;
+      /* text-decoration: underline; */
+  }
+  .list-item {
+      font-size: .75em;
+      font-weight: normal;
+      /* text-decoration: none; */
+  }
