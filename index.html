@@ -12,7 +12,7 @@
   <title>National Park Picker</title>
 </head>
 
-<body>
+<body id="overrides">
   <header>
     <!-- Nav bar -->
     <div class="navbar-fixed nav-transparent">
@@ -157,17 +157,18 @@
   <footer class="page-footer">
     <div class="container">
       <div class="row">
-        <div class="col l6 s12">
+        <div class="col l6 s12 footer-width">
           <h5 class="white-text">National Park Picker</h5>
           <p class="grey-text text-lighten-4">Get outdoor and exlpore</p>
         </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Links</h5>
+        <div class="col l4 offset-l2 s12 footer-width">
+          <h5 class="white-text">Need more Information?</h5>
+          <h6 class="white-text">Check out these sites!</h6>
           <ul>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            <li class="grey-text text-lighten-3">Get more information at the <a id="nat-park-site" class="grey-text text-lighten-3 underline" href="https://www.nps.gov/index.htm" target="_blank"> National Park Service</a></li>
+            <li class="grey-text text-lighten-3">Reserve campsites and tours at <a id="rec-site" class="grey-text text-lighten-3 underline" href="https://www.recreation.gov/" target="_blank"> Recreation.gov</a></li>
+            <li class="grey-text text-lighten-3">Look at maps and print pamphlets from <a id="map-site" class="grey-text text-lighten-3 underline" href="http://npmaps.com/" target="_blank"> NP Maps</a></li>
+            <li class="grey-text text-lighten-3">Discover more hikes and trails at <a class="grey-text text-lighten-3 underline" href="https://www.hikingproject.com/nationalparks" target="_blank"> Hiking Project</a></li>
           </ul>
         </div>
       </div>

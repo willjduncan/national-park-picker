@@ -103,3 +103,11 @@
       font-weight: normal;
       /* text-decoration: none; */
   }
+  #overrides .footer-width {
+      padding: 0;
+      margin:0;
+      width: 50%;
+  }
+  .underline {
+      text-decoration: underline;
+  }
