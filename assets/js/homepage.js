@@ -8,261 +8,261 @@ var toursEl = document.querySelector("#tours");
 //park codes
 var parks = [
     {
-    "name" : "Gateway Arch",
-    "code" : "jeff"
+        "name": "Gateway Arch",
+        "code": "jeff"
     },
     {
-    "name" : "Indiana Dunes",
-    "code" : "indu"
+        "name": "Indiana Dunes",
+        "code": "indu"
     },
     {
-    "name" : "White Sands",
-    "code" : "whsa"
+        "name": "White Sands",
+        "code": "whsa"
     },
     {
-    "name" : "Acadia",
-    "code" : "acad"
+        "name": "Acadia",
+        "code": "acad"
     },
     {
-    "name" : "Arches",
-    "code" : "arch"
+        "name": "Arches",
+        "code": "arch"
     },
     {
-    "name" : "Badlands",
-    "code" : "badl"
+        "name": "Badlands",
+        "code": "badl"
     },
     {
-    "name" : "Big Bend",
-    "code" : "bibe"
+        "name": "Big Bend",
+        "code": "bibe"
     },
     {
-    "name" : "Glacier",
-    "code" : "glac"
+        "name": "Glacier",
+        "code": "glac"
     },
     {
-    "name" : "Glacier Bay",
-    "code" : "glba"
+        "name": "Glacier Bay",
+        "code": "glba"
     },
     {
-    "name" : "Biscayne",
-    "code" : "bisc"
+        "name": "Biscayne",
+        "code": "bisc"
     },
     {
-    "name" : "Black Canyon of the Gunnison",
-    "code" : "blca"
+        "name": "Black Canyon of the Gunnison",
+        "code": "blca"
     },
     {
-    "name" : "Bryce Canyon",
-    "code" : "brca"
+        "name": "Bryce Canyon",
+        "code": "brca"
     },
     {
-    "name" : "Canyonlands",
-    "code" : "cany"
+        "name": "Canyonlands",
+        "code": "cany"
     },
     {
-    "name" : "Capitol Reef",
-    "code" : "care"
+        "name": "Capitol Reef",
+        "code": "care"
     },
     {
-    "name" : "Carlsbad Caverns",
-    "code" : "cave"
+        "name": "Carlsbad Caverns",
+        "code": "cave"
     },
     {
-    "name" : "Channel Islands",
-    "code" : "chis"
+        "name": "Channel Islands",
+        "code": "chis"
     },
     {
-    "name" : "Congaree",
-    "code" : "cong"
+        "name": "Congaree",
+        "code": "cong"
     },
     {
-    "name" : "Crater Lake",
-    "code" : "crla"
+        "name": "Crater Lake",
+        "code": "crla"
     },
     {
-    "name" : "Cuyahoga Valley",
-    "code" : "cuva"
+        "name": "Cuyahoga Valley",
+        "code": "cuva"
     },
     {
-    "name" : "Death Valley",
-    "code" : "deva"
+        "name": "Death Valley",
+        "code": "deva"
     },
     {
-    "name" : "Denali",
-    "code" : "dena"
+        "name": "Denali",
+        "code": "dena"
     },
     {
-    "name" : "Dry Tortugas",
-    "code" : "drto"
+        "name": "Dry Tortugas",
+        "code": "drto"
     },
     {
-    "name" : "Everglades",
-    "code" : "ever"
+        "name": "Everglades",
+        "code": "ever"
     },
     {
-    "name" : "Gates of the Arctic",
-    "code" : "gaar"
+        "name": "Gates of the Arctic",
+        "code": "gaar"
     },
     {
-    "name" : "Grand Canyon",
-    "code" : "grca"
+        "name": "Grand Canyon",
+        "code": "grca"
     },
     {
-    "name" : "Grand Teton",
-    "code" : "grte"
+        "name": "Grand Teton",
+        "code": "grte"
     },
     {
-    "name" : "Great Basin",
-    "code" : "grba"
+        "name": "Great Basin",
+        "code": "grba"
     },
     {
-    "name" : "Great Sand Dunes",
-    "code" : "grsa"
+        "name": "Great Sand Dunes",
+        "code": "grsa"
     },
     {
-    "name" : "Great Smoky Mountains",
-    "code" : "grsm"
+        "name": "Great Smoky Mountains",
+        "code": "grsm"
     },
     {
-    "name" : "Guadalupe Mountains",
-    "code" : "gumo"
+        "name": "Guadalupe Mountains",
+        "code": "gumo"
     },
     {
-    "name" : "Haleakala",
-    "code" : "hale"
+        "name": "Haleakala",
+        "code": "hale"
     },
     {
-    "name" : "Hawaii Volcanoes",
-    "code" : "havo"
+        "name": "Hawaii Volcanoes",
+        "code": "havo"
     },
     {
-    "name" : "Hot Springs",
-    "code" : "hosp"
+        "name": "Hot Springs",
+        "code": "hosp"
     },
     {
-    "name" : "Isle Royale",
-    "code" : "isro"
+        "name": "Isle Royale",
+        "code": "isro"
     },
     {
-    "name" : "Joshua Tree",
-    "code" : "jotr"
+        "name": "Joshua Tree",
+        "code": "jotr"
     },
     {
-    "name" : "Katmai",
-    "code" : "katm"
+        "name": "Katmai",
+        "code": "katm"
     },
     {
-    "name" : "Kenai Fjords",
-    "code" : "kefj"
+        "name": "Kenai Fjords",
+        "code": "kefj"
     },
     {
-    "name" : "Kings Canyon",
-    "code" : "seki"
+        "name": "Kings Canyon",
+        "code": "seki"
     },
     {
-    "name" : "Kobuk Valley",
-    "code" : "kova"
+        "name": "Kobuk Valley",
+        "code": "kova"
     },
     {
-    "name" : "Lake Clark",
-    "code" : "lacl"
+        "name": "Lake Clark",
+        "code": "lacl"
     },
     {
-    "name" : "Lassen Volcanic",
-    "code" : "lavo"
+        "name": "Lassen Volcanic",
+        "code": "lavo"
     },
     {
-    "name" : "Mammoth Cave",
-    "code" : "maca"
+        "name": "Mammoth Cave",
+        "code": "maca"
     },
     {
-    "name" : "Mesa Verde",
-    "code" : "meve"
+        "name": "Mesa Verde",
+        "code": "meve"
     },
     {
-    "name" : "Mount Rainier",
-    "code" : "mora"
+        "name": "Mount Rainier",
+        "code": "mora"
     },
     {
-    "name" : "American Samoa",
-    "code" : "npsa"
+        "name": "American Samoa",
+        "code": "npsa"
     },
     {
-    "name" : "North Cascades",
-    "code" : "noca"
+        "name": "North Cascades",
+        "code": "noca"
     },
     {
-    "name" : "Olympic",
-    "code" : "olym"
+        "name": "Olympic",
+        "code": "olym"
     },
     {
-    "name" : "Petrified Forest",
-    "code" : "pefo"
+        "name": "Petrified Forest",
+        "code": "pefo"
     },
     {
-    "name" : "Pinnacles",
-    "code" : "pinn"
+        "name": "Pinnacles",
+        "code": "pinn"
     },
     {
-    "name" : "Redwood",
-    "code" : "redw"
+        "name": "Redwood",
+        "code": "redw"
     },
     {
-    "name" : "Rocky Mountain",
-    "code" : "romo"
+        "name": "Rocky Mountain",
+        "code": "romo"
     },
     {
-    "name" : "Saguaro",
-    "code" : "sagu"
+        "name": "Saguaro",
+        "code": "sagu"
     },
     {
-    "name" : "Sequoia",
-    "code" : "seki"
+        "name": "Sequoia",
+        "code": "seki"
     },
     {
-    "name" : "Shenandoah",
-    "code" : "shen"
+        "name": "Shenandoah",
+        "code": "shen"
     },
     {
-    "name" : "Theodore Roosevelt",
-    "code" : "thro"
+        "name": "Theodore Roosevelt",
+        "code": "thro"
     },
     {
-    "name" : "Virgin Islands",
-    "code" : "viis"
+        "name": "Virgin Islands",
+        "code": "viis"
     },
     {
-    "name" : "Voyageurs",
-    "code" : "voya"
+        "name": "Voyageurs",
+        "code": "voya"
     },
     {
-    "name" : "Wind Cave",
-    "code" : "wica"
+        "name": "Wind Cave",
+        "code": "wica"
     },
     {
-    "name" : "Wrangell-St. Elias",
-    "code" : "wrst"
+        "name": "Wrangell-St. Elias",
+        "code": "wrst"
     },
     {
-    "name" : "Yellowstone",
-    "code" : "yell"
+        "name": "Yellowstone",
+        "code": "yell"
     },
     {
-    "name" : "Yosemite",
-    "code" : "yose"
+        "name": "Yosemite",
+        "code": "yose"
     },
     {
-    "name" : "Zion",
-    "code" : "zion"
+        "name": "Zion",
+        "code": "zion"
     },
     {
-    "name" : "New River Gorge",
-    "code" : "neri"
+        "name": "New River Gorge",
+        "code": "neri"
     }
 ]
 // END ARRAY OF PARK CODES
 
-var clearItems = function(){
+var clearItems = function () {
     while (resultsEl.firstChild) {
         resultsEl.removeChild(resultsEl.firstChild);
     };
@@ -278,7 +278,7 @@ var clearItems = function(){
 };
 
 //BEGIN FETCH AND DISPLAY FOR BASIC NAT PARK INFO
-var getNatParkInfo = function(code) {
+var getNatParkInfo = function (code) {
     var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     fetch(natParkUrl)
         .then(function (response) {
@@ -297,7 +297,7 @@ var getNatParkInfo = function(code) {
 };
 
 var displayNatParkInfo = function (data) {
-    console.log("BASIC INFO: " );
+    console.log("BASIC INFO: ");
     console.log(data);
     //Display National Park name as a title
     var name = data.data[0].fullName;
@@ -320,7 +320,7 @@ var displayNatParkInfo = function (data) {
     addressTitleEl.setAttribute("style", "font-weight:bold;");
     var addressEl = document.createElement("span");
     if (!line2) {
-        addressEl.textContent = line1 + ", " + city + ", " + state + " " + zip; 
+        addressEl.textContent = line1 + ", " + city + ", " + state + " " + zip;
     } else {
         addressEl.textContent = line1 + ", " + line2 + ", " + city + ", " + state + " " + zip;
     }
@@ -332,22 +332,30 @@ var displayNatParkInfo = function (data) {
     //display directions
     var directions = data.data[0].directionsInfo;
     var directionsEl = document.createElement("p");
-    directionsEl.textContent= directions;
+    directionsEl.textContent = directions;
     resultsEl.append(directionsEl);
-    //display new pictures
-    console.log("IMAGES: " );
+    //display new pictures for slider
+    console.log("IMAGES: ");
     console.log(data.data[0].images);
     var images = data.data[0].images;
-    for (var i =0; i<4;i++) {
-        var index = ("img" + i);  
+    for (var i = 0; i < 4; i++) {
+        //post imgs
+        var index = ("img" + i);
         document.getElementById(index).src = images[i].url;
+        //post names for imgs
+        var indexN = ("imgName" + i);
+        document.getElementById(indexN).textContent = images[i].title;
+        //post descriptions for imgs
+        var indexD = ("descr" + i);
+        document.getElementById(indexD).textContent = images[i].caption;
     }
-    
+
+
 }
 //END FETCH AND DISPLAY OF BASIC PARK INFO 
 
 // BEGIN FETCH AND DISPLAY OF PARK ALERTS
-var getNatParkAlerts = function(code) {
+var getNatParkAlerts = function (code) {
     var natParkUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     fetch(natParkUrl)
         .then(function (response) {
@@ -368,18 +376,20 @@ var getNatParkAlerts = function(code) {
 var displayNatParkAlerts = function (data) {
     // console.log(data);
     var alertArr = data.data;
-    for (var i=0; i<alertArr.length;i++) {
+    for (var i = 0; i < alertArr.length; i++) {
         var alertTitle = alertArr[i].title;
         var alertTitleEl = document.createElement("p");
-        alertTitleEl.textContent = "ALERT: " + alertTitle;
+        alertTitleEl.innerHTML = '<a class="btn-floating pulse"><i class="material-icons alert">priority_high</i></a> ALERT: ' + alertTitle;
+        //alertTitleEl.textContent = "ALERT: " + alertTitle;
         alertTitleEl.setAttribute("style", "color: red");
         alertsEl.append(alertTitleEl);
+        //<a class="btn-floating pulse"><i class="material-icons">priority_high</i></a>
     }
 }
 //END FETCH AND DISPLAY OF NAT PARK ALERTS
 
 //BEGIN FETCH AND DISPLAY OF THINGS TO DO
-var getNatParkToDos = function(code) {
+var getNatParkToDos = function (code) {
     var natParkUrl = "https://developer.nps.gov/api/v1/thingstodo?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     fetch(natParkUrl)
         .then(function (response) {
@@ -398,12 +408,12 @@ var getNatParkToDos = function(code) {
 };
 
 var displayNatParkToDos = function (data) {
-    console.log("TO DOS: " );
+    console.log("TO DOS: ");
     console.log(data);
     var toDoArr = data.data;
     var toDoEl = document.createElement("h3");
     if (!toDoArr[0]) {
-        toDoEl.textContent = "No Recommended Activities";  
+        toDoEl.textContent = "No Recommended Activities";
     } else {
         //Add a photo of the first activity to the page
         toDoEl.textContent = "Recommended Activities";
@@ -416,22 +426,22 @@ var displayNatParkToDos = function (data) {
     }
     activitiesEl.append(toDoEl);
     //get title, duration, description, and season description
-    for (var i=0; i<toDoArr.length;i++) {
+    for (var i = 0; i < toDoArr.length; i++) {
         //get activity title
         var toDoTitle = toDoArr[i].title;
         var toDoTitleEl = document.createElement("h5");
-        toDoTitleEl.textContent= toDoTitle + " ";
+        toDoTitleEl.textContent = toDoTitle + " ";
         //if there is a duration mentioned in the data, append it to the end of the activity title
         var toDoLengthEl = document.createElement("span");
         if (toDoArr[i].duration) {
             toDoLengthEl.textContent = " Duration: " + toDoArr[i].duration;
-            toDoLengthEl.setAttribute ("style", "font-weight:bold; font-size:.65em");
+            toDoLengthEl.setAttribute("style", "font-weight:bold; font-size:.65em");
             toDoTitleEl.append(toDoLengthEl);
         }
         //add the short description
         var toDoDesc = toDoArr[i].shortDescription;
         var toDoDescEl = document.createElement("p");
-        toDoDescEl.textContent= toDoDesc;
+        toDoDescEl.textContent = toDoDesc;
         //add season description
         var seasonDescEl = document.createElement("p");
         $(seasonDescEl).html(toDoArr[i].seasonDescription);
@@ -444,7 +454,7 @@ var displayNatParkToDos = function (data) {
 //END FETCH AND DISPLAY OF THINGS TO DO
 
 //BEGIN FETCH AND DISPLAY OF TOURS
-var getNatParkTours = function(code) {
+var getNatParkTours = function (code) {
     var natParkUrl = "https://developer.nps.gov/api/v1/tours?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     fetch(natParkUrl)
         .then(function (response) {
@@ -463,18 +473,18 @@ var getNatParkTours = function(code) {
 };
 
 var displayNatParkTours = function (data) {
-    console.log("TOURS: " );
+    console.log("TOURS: ");
     console.log(data);
     var toursArr = data.data;
     var toursTitleEl = document.createElement("h3");
     if (!toursArr[0]) {
-        toursTitleEl.textContent = "No Tours Available";  
+        toursTitleEl.textContent = "No Tours Available";
     } else {
         toursTitleEl.textContent = "Tours";
     }
     toursEl.append(toursTitleEl);
     //get title, duration, durationUnit, description, 
-    for (var i=0; i < toursArr.length; i++) {
+    for (var i = 0; i < toursArr.length; i++) {
         //get tour title
         var tourNameEl = document.createElement("h5");
         tourNameEl.textContent = toursArr[i].title + " ";
@@ -487,7 +497,7 @@ var displayNatParkTours = function (data) {
         } else {
             tourLengthEl.textContent = " Duration Unspecified";
         }
-        tourLengthEl.setAttribute ("style", "font-weight:bold; font-size:.65em");
+        tourLengthEl.setAttribute("style", "font-weight:bold; font-size:.65em");
         tourNameEl.append(tourLengthEl);
         //get tour description
         var tourDescEl = document.createElement("p");
@@ -500,22 +510,22 @@ var displayNatParkTours = function (data) {
 //END FETCH AND DISPLAY OF TOURS
 
 //TO HANDLE THE PARK SUBMISSION BUTTON
-var formSubmitHandler = function(event) {
+var formSubmitHandler = function (event) {
     event.preventDefault();
     // get value from input element
     var submission = nameInputEl.value.trim();
     var park = parks.find(park => park.name === submission);
     console.log(park.name);
-   //If the user wrote a park, empty the input section and get the nat park info
+    //If the user wrote a park, empty the input section and get the nat park info
     if (submission) {
-    clearItems();
-    getNatParkInfo(park.code);
-    getNatParkAlerts (park.code);
-    getNatParkToDos (park.code);
-    getNatParkTours(park.code);
-    nameInputEl.value = "";
+        clearItems();
+        getNatParkInfo(park.code);
+        getNatParkAlerts(park.code);
+        getNatParkToDos(park.code);
+        getNatParkTours(park.code);
+        nameInputEl.value = "";
     } else {
-    alert("Please enter a National Park.");
+        alert("Please enter a National Park.");
     }
 };
 
@@ -529,8 +539,8 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-    
-    
+
+
 });
 
 // Input-search NP form

@@ -8,6 +8,8 @@
     top: -32px;
 }
 
+
+
 .result {
     aspect-ratio: 2 / 1;
 }
@@ -65,4 +67,18 @@
     color: #3498db;
   }
 
-  
+  .caption {
+    color: black !important;
+    font-style: italic !important;
+    font-weight: bold !important;
+    background-color:rgba(245, 245, 245, 0.295) ;
+    border-radius: 70px;
+  }
+
+  .alert {
+    color: red !important;
+  }
+
+  #alerts {
+    font-family: 'Times New Roman', Times, serif;
+  }
