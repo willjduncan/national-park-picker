@@ -1,23 +1,20 @@
+html {
+    scroll-behavior: smooth;
+}
 .nav-transparent{
     background-color: rgba(0, 145, 234, 0.2) !important ;
 }
-
 .slider,
 .slides{
     position: relative;
     top: -32px;
 }
-
-
-
 .result {
     aspect-ratio: 2 / 1;
 }
-
 .page-footer {
     background-color: rgba(0, 145, 234, 1) !important ;
 }
-
 .btn-search {
     box-sizing: border-box;
     -webkit-appearance: none;
@@ -60,13 +57,10 @@
   .third:hover {
     box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
   }  
-
-
   .input-field .prefix.active {
     box-shadow: red;
     color: #3498db;
   }
-
   .caption {
     color: black !important;
     font-style: italic !important;
@@ -74,11 +68,9 @@
     background-color:rgba(245, 245, 245, 0.295) ;
     border-radius: 70px;
   }
-
   .alert {
     color: red !important;
   }
-
   #alerts {
     font-family: 'Times New Roman', Times, serif;
   }
