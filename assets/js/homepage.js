@@ -619,4 +619,53 @@ $(document).ready(function () {
     });
 });
 
+
+
+///
+var createCards = function () {
+    //debugger;
+    for (let i = 0; i < 2; i++) {
+        //get code for each NP
+        var parkCard = parks[i].code;
+        //get data for each NP
+        getNPInfo(parkCard);
+
+        function getNPInfo (code) {
+            var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+            fetch(natParkUrl)
+                .then(function (response) {
+                    // request was successful
+                    if (response.ok) {
+                        response.json().then(function (data) {
+                            fillCards(data);
+                        });
+                    } else {
+                        alert('Error: National Park Not Found');
+                    }
+                })
+                .catch(function (error) {
+                    alert("Unable to connect to National Park API");
+                });
+        };
+
+        function fillCards(data) {
+            //get img, imgName and descr for each card on homepage
+            var images = data.data[0].images;
+
+            //post imgs
+            var index = ("cardImg" + i);
+            document.getElementById(index).src = images[i].url;
+            //post names for imgs
+            var indexN = ("cardName" + i);
+            document.getElementById(indexN).textContent = images[i].title;
+            //post descriptions for imgs
+            var indexD = ("cardDescr" + i);
+            document.getElementById(indexD).textContent = images[i].caption;
+
+        }
+    }
+}
+//
+createCards();
+
 searchBtnEl.addEventListener("click", formSubmitHandler);
