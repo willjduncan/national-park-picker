@@ -67,21 +67,41 @@ Our repository on GitHub is named national-park-picker. The link to this reposit
 
 The link to the live website is below: 
 
-<!-- []()  ADD LIVE LINK -->
+<!-- []()  ADD LIVE LINK HERE -->
 
 ## Usage
 
-The mock-up, whose look should not and did not differ from the final product, is shown below
+<!-- MUST ADD THE SCREENSHOTS AND NAME THEM ACCORDINGLY -->
+Screenshots are shown of the HTML, CSS, and JavaScript pages, all built from scratch.
 
-![mock-up](/assets/images/mock-up.png)
+![screenshot of HTML](/assets/images/screenshot-html.png)
+![screenshot of CSS](/assets/images/screenshot-css.png)
+![screenshot of JavaScript](/assets/images/screenshot-js.png)
 
-You can use the new, clean code as a template in case a new page needs to be added to the website, or as an example to show new coders what good code looks like. An example of the edited code is below. Note the alternate text, the comments, and the semantic HTML elements. 
+Screenshots are also provided of the completed website at its load screen, and also mid-search. 
 
-![screenshot](/assets/images/coding-screenshot.png)
+![screenshot of the homepage](/assets/images/screenshot-homepage.png)
+
+The search bar autofills to help prevent user error. Note the saved national parks displayed on the left. At the top, a delightful slideshow gives fun facts. Below, cards show the high-priority parks. 
+
+![screenshot of the website mid-search](/assets/images/screenshot-active.png) 
+
+When searched, the photos change to reflect the national park. A description is given, followed by the address and directions to get there. Beyond that are the top 50 activities to engage in and any tours available, all with durations listed (if available). The weather for the next 5 days is shown for the park. At the footer, the links of the top three websites change to search according to the named national park.
+
+## Future Projects and Potential
+
+The great thing about this project is that there are many ways to expand this website. 
+
+First, you could add maps. It would provide a much better insight into where these places are in comparison to a mere address. Once you get maps up, you can then focus on creating a saved map where the user can add whatever national park she/he wants. Add in an ability to rearrange the list and create routes, and you have a great enhancement to the art of planning. 
+
+If you want to provide more information for each national park, you could turn the whole information section into an accordian according to subject. More photos can always be provided as well. Furthermore, the search could expand beyond national parks and into national monuments, civil war memorials, and other federal lands that fall under the National Park Service.
+
+Advertisement could come from a slew of outdoor companies such as REI or provide more precise product placement by endorsing specific brands of gear, such as Osprey. Links to other lodgings, such as KOA and hotels.com would widen the website's reach. Someone could offer tours or personally tailored trips on the website to convert views into clients. A comments and contact us section would be good to add at that point.
+
 
 ## Credits
-
-<!-- ADD CREDITS HERE -->
+We used the NPS API for the majority of our information, including photos and coordinates. We used AccuWeather's API for the 5-day forecast. Materialize was used as our CSS library and JQuery was used for convenience sake. The WHEN/THEN section of this README was based off the project assignment Acceptance Criteria. All previous challenges, module creations, and in-class assignments up to this point were used to refresh our memory on material we've previously applied. Stack Overflow, MDN Web Docs, W3, and Google were critical to our success. 
+<!-- ADD FURTHER CREDITS HERE -->
 
 ## License
 
