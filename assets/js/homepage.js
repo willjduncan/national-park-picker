@@ -681,7 +681,7 @@ var createCards = function () {
 //
 createCards();
 
-searchBtnEl.addEventListener("click", formSubmitHandler);
+
 $("#check").click(function(){
     var parkName = $("#results").find("h2").text();
     var priority = $('input[name=priority]:checked', '.choices').val()
@@ -728,6 +728,8 @@ var loadParks = function(){
     }
     $(".list-header li").addClass("list-item");
 }
+
+
 
 searchBtnEl.addEventListener("click", formSubmitHandler);
 loadParks();
