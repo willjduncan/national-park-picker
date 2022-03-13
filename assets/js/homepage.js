@@ -136,7 +136,7 @@ var parks = [
         "code": "hale"
     },
     {
-        "name": "Hawaii Volcanoes",
+        "name": "Hawai’i Volcanoes",
         "code": "havo"
     },
     {
@@ -306,10 +306,12 @@ var getNatParkInfo = function (code) {
 var displayNatParkInfo = function (data) {
     console.log("BASIC INFO: ");
     console.log(data);
+    $("#desc-link").removeClass("hide");
     //Display National Park name as a title
     var name = data.data[0].fullName;
     var titleEl = document.createElement("h2");
     titleEl.textContent = name;
+    titleEl.setAttribute("id", "desc-header");
     resultsEl.append(titleEl);
     //display description beneath the title
     var description = data.data[0].description;
@@ -356,8 +358,19 @@ var displayNatParkInfo = function (data) {
         var indexD = ("descr" + i);
         document.getElementById(indexD).textContent = images[i].caption;
     }
+    //replace links in the footer for nps, rec.gov, and npmaps to reflect the searched park
+    var newUrl = data.data[0].url;
+    $("#nat-park-site").attr("href", newUrl);
+    var parkName = $("#results").find("h2").text();
+    $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
+    var parkSearchArr = parkName.split(" National Park");
+    var parkSearchCode = parkSearchArr[0];
+    parkSearchCode = parkSearchCode.toLowerCase();
+    parkSearchCode = parkSearchCode.replaceAll(" ", "-");
+    parkSearchCode = parkSearchCode.replaceAll("ʻ","");
+    // parkSearchCode = parkSearchCode.join("");
 
-
+    $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
 }
 //END FETCH AND DISPLAY OF BASIC PARK INFO 
 
@@ -417,6 +430,7 @@ var getNatParkToDos = function (code) {
 var displayNatParkToDos = function (data) {
     console.log("TO DOS: ");
     console.log(data);
+    $("#toDos-link").removeClass("hide");
     var toDoArr = data.data;
     var toDoEl = document.createElement("h3");
     if (!toDoArr[0]) {
@@ -427,10 +441,11 @@ var displayNatParkToDos = function (data) {
         var imgEl = document.createElement("img");
         imgEl.src = toDoArr[0].images[0].url;
         imgEl.alt = toDoArr[0].images[0].altText;
-        imgEl.setAttribute("style", "display:block; width:auto; height:450px")
+        imgEl.setAttribute("style", "display:block; width:auto; height:450px");
         toDoEl.setAttribute("style", "text-decoration:underline");
         toDoEl.append(imgEl);
     }
+    toDoEl.setAttribute("id", "activities-header");
     activitiesEl.append(toDoEl);
     //get title, duration, description, and season description
     for (var i = 0; i < toDoArr.length; i++) {
@@ -482,6 +497,7 @@ var getNatParkTours = function (code) {
 var displayNatParkTours = function (data) {
     console.log("TOURS: ");
     console.log(data);
+    $("#tours-link").removeClass("hide");
     var toursArr = data.data;
     var toursTitleEl = document.createElement("h3");
     if (!toursArr[0]) {
@@ -489,6 +505,7 @@ var displayNatParkTours = function (data) {
     } else {
         toursTitleEl.textContent = "Tours";
     }
+    toursEl.setAttribute("id", "tours-header");
     toursEl.append(toursTitleEl);
     //get title, duration, durationUnit, description, 
     for (var i = 0; i < toursArr.length; i++) {
