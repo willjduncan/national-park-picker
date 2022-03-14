@@ -247,7 +247,9 @@ overflow: hidden;
     text-decoration: underline;
 }
 
-
+.cardConteiner {
+  cursor: url(/assets/images/frozen-panther.png), auto;
+}
 
 /* .card-content {
   overflow: hidden;
