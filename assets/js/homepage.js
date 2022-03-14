@@ -811,7 +811,7 @@ var display5Day = function(weather){
        //append forcast to div
         forecastContainerEl.appendChild(forecastEl);
     }
-
+}
 
 var addParkPrompt = function (submission) {
     addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?"
@@ -954,4 +954,3 @@ function addStoredParkToCard(parkName) {
 //         }
 //     }
 // }
-
