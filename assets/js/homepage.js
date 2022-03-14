@@ -292,6 +292,7 @@ var clearItems = function () {
 //BEGIN FETCH AND DISPLAY FOR BASIC NAT PARK INFO
 var getNatParkInfo = function (code) {
     var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+
     fetch(natParkUrl)
         .then(function (response) {
             // request was successful
@@ -300,11 +301,13 @@ var getNatParkInfo = function (code) {
                     displayNatParkInfo(data);
                 });
             } else {
-                alert('Error: National Park Not Found');
+                modalParkNotFound();
+                //alert('Error: National Park Not Found');
             }
         })
         .catch(function (error) {
-            alert("Unable to connect to National Park API");
+            modalUnableToConnect();
+            // alert("Unable to connect to National Park API");
         });
 };
 
@@ -391,11 +394,13 @@ var getNatParkAlerts = function (code) {
                     displayNatParkAlerts(data);
                 });
             } else {
-                alert('Error: National Park Not Found');
+                modalParkNotFound();
+                //alert('Error: National Park Not Found');
             }
         })
         .catch(function (error) {
-            alert("Unable to connect to National Park API");
+            modalUnableToConnect();
+            //alert("Unable to connect to National Park API");
         });
 };
 
@@ -425,11 +430,13 @@ var getNatParkToDos = function (code) {
                     displayNatParkToDos(data);
                 });
             } else {
-                alert('Error: National Park Not Found');
+                modalParkNotFound();
+                //alert('Error: National Park Not Found');
             }
         })
         .catch(function (error) {
-            alert("Unable to connect to National Park API");
+            modalUnableToConnect();
+            //alert("Unable to connect to National Park API");
         });
 };
 
@@ -492,11 +499,13 @@ var getNatParkTours = function (code) {
                     displayNatParkTours(data);
                 });
             } else {
-                alert('Error: National Park Not Found');
+                modalParkNotFound();
+                //alert('Error: National Park Not Found');
             }
         })
         .catch(function (error) {
-            alert("Unable to connect to National Park API");
+            modalUnableToConnect();
+            //alert("Unable to connect to National Park API");
         });
 };
 
@@ -570,7 +579,8 @@ var formSubmitHandler = function (event) {
         get5Day(park.name);
         nameInputEl.value = "";
     } else {
-        alert("Please enter a National Park.");
+        modalEnterValidPark();
+        //alert("Please enter a National Park.");
     }
 };
 
@@ -764,6 +774,31 @@ var display5Day = function (weather) {
     }
 }
 
+// MODALS
+function modalParkNotFound() {
+    $("#modal-header").text("Error: National Park Not Found");
+    modal();
+}
+
+function modalUnableToConnect() {
+    $("#modal-header").text("Unable to connect to National Park API");
+    modal();
+}
+
+function modalEnterValidPark() {
+    $("#modal-header").text("Please enter a National Park.");
+    modal();
+}
+
+function modal() {
+    $(document).ready(function () {
+        $('#modal').modal();
+        $('#modal').modal('open');
+    });
+}
+
+// END MODALS
+
 searchBtnEl.addEventListener("click", formSubmitHandler);
 loadParks();
 
@@ -796,19 +831,21 @@ function addStoredParkToCard(parkName) {
                         fillCards(data);
                     });
                 } else {
-                    alert('Error: National Park Not Found');
+                    modalParkNotFound();
+                    //alert('Error: National Park Not Found');
                 }
             })
             .catch(function (error) {
-                alert("Unable to connect to National Park API");
+                modalUnableToConnect();
+                //alert("Unable to connect to National Park API");
             });
     };
 
     //create and fill card with park-data
     function fillCards(data) {
-        if(localStorage.length > 0) {
+        if (localStorage.length > 0) {
             $("#defaultCard").addClass("hide");
-            
+
             // //get image data which has img-url, img-name and img-descr
             var images = data.data[0].images;
             //create card append it to container and fill up with info from local storage
@@ -844,7 +881,7 @@ function addStoredParkToCard(parkName) {
         else {
             $("#defaultCard").removeClass("hide")
         }
-        
+
         $('.card').append(
             $('<div/>')
                 .addClass("card-content")
@@ -857,3 +894,5 @@ function addStoredParkToCard(parkName) {
         i++;
     }
 };
+
+

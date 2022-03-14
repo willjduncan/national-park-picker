@@ -76,7 +76,7 @@
         <div class="input-field col s12">
           <i class="material-icons prefix">chevron_right</i>
           <input name="park-name" id="park-name" type="text" autofocus="true" class="autocomplete"
-            placeholder="Yosemite" />
+          placeholder="Yosemite" />
           <button type="submit" class="btn-search third" id="search">Search</button>
           <label for="autocomplete-input">Enter name of the National Park</label>
         </div>
@@ -87,6 +87,18 @@
         </div>
       </div>
     </div>
+
+    <!-- modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h4 id="modal-header">Modal Header</h4>
+        <p id="modal-text"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+      </div>
+    </div>
+    <!--  -->
 
     <!-- alerts -->
     <div class="col s9" id="alerts"></div>
@@ -100,7 +112,7 @@
         <input type="radio" class="radio-btn" id="med-p" name="priority" value="Medium Priority">
         <label for="med-p">Medium Priority</label>
       </div>
-
+      
       <div>
         <input type="radio" class="radio-btn" id="low-p" name="priority" value="Low Priority">
         <label for="low-p">Low Priority</label>
