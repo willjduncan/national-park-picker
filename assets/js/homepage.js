@@ -807,7 +807,6 @@ loadParks();
 
 // PULL HIGH PRIORITY CARDS FROM LOCAL STORAGE AND CREATE/FILL CARDS FOR HOMEPAGE
 function addStoredParkToCard(parkName) {
-
     //remove end part of str to get name from "parks" array
     var park = parkName.replace(' National Park', '');
     //check array for name 
@@ -816,12 +815,10 @@ function addStoredParkToCard(parkName) {
     }
     //parkCode = code of chosen park
     var parkCode = parks.find(isPark).code;
-
     getNPInfo(parkCode);
 
     //get data for park
     function getNPInfo(code) {
-
         var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
         fetch(natParkUrl)
             .then(function (response) {
