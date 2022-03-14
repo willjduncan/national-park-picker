@@ -516,12 +516,20 @@ var displayNatParkTours = function (data) {
         //get tour title
         var tourNameEl = document.createElement("h5");
         tourNameEl.textContent = toursArr[i].title + " ";
-        //append duration to the tour title
+        //append duration to the tour title and label it according to the unit and wheher the duration is a range or one specific length.
         var tourLengthEl = document.createElement("span");
         if (toursArr[i].durationUnit === "m") {
-            tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " minutes";
+            if (toursArr[i].durationMin === toursArr[i].durationMax) {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " minutes";
+            } else {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " minutes";
+            }
         } else if (toursArr[i].durationUnit === "h") {
-            tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " hours";
+            if (toursArr[i].durationMin === toursArr[i].durationMax) {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " hours";
+            } else {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " hours";
+            }
         } else {
             tourLengthEl.textContent = " Duration Unspecified";
         }
