@@ -12,6 +12,7 @@ var storeLowEl = document.querySelector(".store-low");
 var apiKeyWeather = "VDnb8aw7KhRDLBsowfaPixWuDjegRJ83";
 var forecastContainerEl = document.querySelector("#fiveday-container");
 var forecastTitle = document.querySelector("#forecast");
+var i = 0;
 //park codes
 var parks = [
     {
@@ -369,7 +370,7 @@ var displayNatParkInfo = function (data) {
     var parkSearchArr = parkName.split(" National Park");
     var parkSearchCode = parkSearchArr[0];
     parkSearchCode = parkSearchCode.toLowerCase();
-    parkSearchCode = parkSearchCode.replaceAll(" ", "-");
+    parkSearchCode = parkSearchCode.replaceAll(" ","-");
     parkSearchCode = parkSearchCode.replaceAll("ʻ","");
     // parkSearchCode = parkSearchCode.join("");
 
@@ -803,7 +804,146 @@ var display5Day = function(weather){
         forecastContainerEl.appendChild(forecastEl);
     }
 
+
+var addParkPrompt = function (submission) {
+    addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?"
+    $(".choices").removeClass("hide");
+
 }
 searchBtnEl.addEventListener("click", formSubmitHandler);
 loadParks();
+
+
+
+
+
+function addStoredParkToCard(parkName) {
+
+    //get code for each NP
+    var park = parkName.replace(' National Park', '');
+
+    function isPark(NP) {
+        return NP.name === park;
+    }
+    console.log(parks.find(isPark).code);
+    var parkCode = parks.find(isPark).code;
+
+    //get data for each NP
+    getNPInfo(parkCode);
+
+    function getNPInfo(code) {
+
+        var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+        fetch(natParkUrl)
+            .then(function (response) {
+                // request was successful
+                if (response.ok) {
+                    response.json().then(function (data) {
+                        fillCards(data);
+                    });
+                } else {
+                    alert('Error: National Park Not Found');
+                }
+            })
+            .catch(function (error) {
+                alert("Unable to connect to National Park API");
+            });
+        };
+        
+        function fillCards(data) {
+
+        // //get img, imgName and descr for each card on homepage
+         var images = data.data[0].images;
+        //create card append it to container and fill up with info from local storage
+        $('#cardParent').append(
+            $('<div/>')
+            .addClass("col s5 m5 hoverable cardConteiner")
+            
+            .append(
+                $('<div/>')
+                .addClass("card")
+            
+                .append(
+                    $('<div/>')
+                    .addClass("card-image")
+                    
+                    .append(
+                        $('<img/>')
+                        .attr("id", "cardImg" + i)
+                        .attr("src", images[i].url)
+                        .addClass("aspect-ratio")
+                    )
+                    .append(
+                        $('<span/>')
+                        .attr("id", "cardName" + i)
+                        .addClass("card-title")
+                        .text(parkName)
+                    )
+                    //add <a> element 
+                )
+            )
+        );
+
+        $('.card').append(
+            $('<div/>')
+            .addClass("card-content")
+            .append(
+                $('<p/>')
+                .attr("id", "cardDescr" + i)
+                .text(images[i].caption)
+            )
+        )
+
+        i++;
+
+    }
+
+
+
+
+};
+
+// Create cards of favorite NPs
+// var createCards = function () {
+//     for (let i = 0; i < 2; i++) {
+//         //get code for each NP
+//         var parkCard = parks[i].code;
+//         //get data for each NP
+//         getNPInfo(parkCard);
+
+//         function getNPInfo (code) {
+//             var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+//             fetch(natParkUrl)
+//                 .then(function (response) {
+//                     // request was successful
+//                     if (response.ok) {
+//                         response.json().then(function (data) {
+//                             fillCards(data);
+//                         });
+//                     } else {
+//                         alert('Error: National Park Not Found');
+//                     }
+//                 })
+//                 .catch(function (error) {
+//                     alert("Unable to connect to National Park API");
+//                 });
+//         };
+
+//         function fillCards(data) {
+//             //get img, imgName and descr for each card on homepage
+//             var images = data.data[0].images;
+
+//             //post imgs
+//             var index = ("cardImg" + i);
+//             document.getElementById(index).src = images[i].url;
+//             //post names for imgs
+//             var indexN = ("cardName" + i);
+//             document.getElementById(indexN).textContent = images[i].title;
+//             //post descriptions for imgs
+//             var indexD = ("cardDescr" + i);
+//             document.getElementById(indexD).textContent = images[i].caption;
+
+//         }
+//     }
+// }
 

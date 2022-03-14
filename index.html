@@ -22,7 +22,7 @@
           <ul class="right hide-on-med-and-down">
             <li id="desc-link" class="hide"><a href="./index.html#desc-header">Description</a></li>
             <li id="toDos-link" class="hide"><a href="./index.html#activities-header">Activities</a></li>
-            <li id="tours-link"class="hide"><a href="./index.html#tours-header">Tours</a></li>
+            <li id="tours-link" class="hide"><a href="./index.html#tours-header">Tours</a></li>
             <li><a href="./index.html#resources">Resources</a></li>
           </ul>
         </div>
@@ -42,22 +42,24 @@
         <li>
           <img id="img1" src="https://wallpapercave.com/wp/wp4738993.jpg">
           <div class="caption center-align">
-            <h3 id="imgName1">National parks contain at least 247 species of threatened or endangered plants and animals, more than 75,000 archeological sites, and nearly 27,000 historic and prehistoric structures.</h3>
-            <h5 id="descr1" ></h5>
+            <h3 id="imgName1">National parks contain at least 247 species of threatened or endangered plants and
+              animals, more than 75,000 archeological sites, and nearly 27,000 historic and prehistoric structures.</h3>
+            <h5 id="descr1"></h5>
           </div>
         </li>
         <li>
           <img id="img2" src="https://wallpapercave.com/wp/wp3899205.jpg">
           <div class="caption center-align">
             <h3 id="imgName2">There are 879 visitor centers in the National Park System.</h3>
-            <h5 id="descr2" ></h5>
+            <h5 id="descr2"></h5>
           </div>
         </li>
         <li>
           <img id="img3" src="https://wallpapercave.com/wp/wp4738978.jpg">
           <div class="caption center-align">
-            <h3 id="imgName3">There are over 18,000 miles of trails in the national parks just waiting for you to explore them!</h3>
-            <h5 id="descr3" ></h5>
+            <h3 id="imgName3">There are over 18,000 miles of trails in the national parks just waiting for you to
+              explore them!</h3>
+            <h5 id="descr3"></h5>
           </div>
         </li>
       </ul>
@@ -78,9 +80,9 @@
           <label for="autocomplete-input">Enter name of the National Park</label>
         </div>
         <div class="col s12">
-          <ul class = "store-high hide list-header">High Priority Parks</ul>
-          <ul class = "store-med hide list-header">Medium Priority Parks</ul>
-          <ul class = "store-low hide list-header">Low Priority Parks</ul>
+          <ul class="store-high hide list-header">High Priority Parks</ul>
+          <ul class="store-med hide list-header">Medium Priority Parks</ul>
+          <ul class="store-low hide list-header">Low Priority Parks</ul>
         </div>
       </div>
     </div>
@@ -90,37 +92,33 @@
     <div class="col s9" id="add-park"></div>
     <div class="choices hide">
       <div>
-        <input type="radio" class="radio-btn" id="high-p" name="priority" value="High Priority"
-              checked>
+        <input type="radio" class="radio-btn" id="high-p" name="priority" value="High Priority" checked>
         <label for="high-p">High Priority</label>
       </div>
-      
       <div>
         <input type="radio" class="radio-btn" id="med-p" name="priority" value="Medium Priority">
         <label for="med-p">Medium Priority</label>
       </div>
-      
+
       <div>
         <input type="radio" class="radio-btn" id="low-p" name="priority" value="Low Priority">
         <label for="low-p">Low Priority</label>
       </div>
-      <input type="button" class="radio-btn" id="check" name="check" value = "Add Park">
-  </div>
-
+      <input type="button" class="radio-btn" id="check" name="check" value="Add Park">
+    </div>
 
     <!-- Results shows here -->
     <div class="col s9" id="results">
-      <div class="row cardConteiner">
-
-        <div class="col s9 m5 cardConteiner hoverable">
+      <div id="cardParent" class="row">
+   <div id="defailtCard" class="col s5 m5 hoverable cardConteiner">
           <div class="card">
             <div class="card-image">
-              <img id="cardImg0" class="result" src="https://wallpapercave.com/wp/wp4738978.jpg">
-              <span id="cardName0" class="card-title">Card Title</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+              <img id="cardImg0" class="aspect-ratio" src="./assets/images/content-cards-placeholder.png">
+              <span id="cardName0" class="card-title">Your favorite park</span>
+              <a></a>
             </div>
             <div class="card-content">
-              <p id="cardDescr0">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+              <p id="cardDescr0">Search for National Park and Add it to your favorites, so you can find it on homepage</p>
             </div>
           </div>
         </div>
@@ -150,17 +148,6 @@
     <h2 class= "col-12" id = "forecast"></h2>
     <div class = "d-flex" id = "fiveday-container">
   </div>
-
-
-
-
-  <!-- <div class="row">
-    <div class="col s3" id="input">
-
-    </div> -->
-
-
-
   <div></div>
   <footer class="page-footer">
     <div class="container">
@@ -173,10 +160,17 @@
           <h5 class="white-text">Need more Information?</h5>
           <h6 class="white-text">Check out these sites!</h6>
           <ul>
-            <li class="grey-text text-lighten-3">Get more information at the <a id="nat-park-site" class="grey-text text-lighten-3 underline" href="https://www.nps.gov/index.htm" target="_blank"> National Park Service</a></li>
-            <li class="grey-text text-lighten-3">Reserve campsites and tours at <a id="rec-site" class="grey-text text-lighten-3 underline" href="https://www.recreation.gov/" target="_blank"> Recreation.gov</a></li>
-            <li class="grey-text text-lighten-3">Look at maps and print pamphlets from <a id="map-site" class="grey-text text-lighten-3 underline" href="http://npmaps.com/" target="_blank"> NP Maps</a></li>
-            <li class="grey-text text-lighten-3">Discover more hikes and trails at <a class="grey-text text-lighten-3 underline" href="https://www.hikingproject.com/nationalparks" target="_blank"> Hiking Project</a></li>
+            <li class="grey-text text-lighten-3">Get more information at the <a id="nat-park-site"
+                class="grey-text text-lighten-3 underline" href="https://www.nps.gov/index.htm" target="_blank">
+                National Park Service</a></li>
+            <li class="grey-text text-lighten-3">Reserve campsites and tours at <a id="rec-site"
+                class="grey-text text-lighten-3 underline" href="https://www.recreation.gov/" target="_blank">
+                Recreation.gov</a></li>
+            <li class="grey-text text-lighten-3">Look at maps and print pamphlets from <a id="map-site"
+                class="grey-text text-lighten-3 underline" href="http://npmaps.com/" target="_blank"> NP Maps</a></li>
+            <li class="grey-text text-lighten-3">Discover more hikes and trails at <a
+                class="grey-text text-lighten-3 underline" href="https://www.hikingproject.com/nationalparks"
+                target="_blank"> Hiking Project</a></li>
           </ul>
         </div>
       </div>
@@ -193,6 +187,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
   <script src="./assets/js/homepage.js"></script>
+
 
 </body>
 
