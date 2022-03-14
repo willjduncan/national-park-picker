@@ -368,7 +368,7 @@ var displayNatParkInfo = function (data) {
     $("#nat-park-site").attr("href", newUrl);
     var parkName = $("#results").find("h2").text();
     $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
-//////////////////////////////////////////////////////////  FIX AN ISSUE FOR [national and state parkS]  //////////////////////////////////////////////
+    //////////////////////////////////////////////////////////  FIX AN ISSUE FOR [national and state parkS]  //////////////////////////////////////////////
     var parkSearchArr = parkName.split(" National Park");
     var parkSearchCode = parkSearchArr[0];
     parkSearchCode = parkSearchCode.toLowerCase();
@@ -685,8 +685,9 @@ var loadParks = function () {
     };
     storeLowEl.textContent = "Low Priority Parks";
     for (var i = 0; i < localStorage.length; i++) {
-//////////////////////////////////////////////////////////////fix case with " national and state parks"/////////////////////////////////
+        //////////////////////////////////////////////////////////////fix case with " national and state parks"/////////////////////////////////
         if (localStorage.key(i).match("National Park")) {
+            //$("#defaultCard").addClass("hide");
             // console.log(localStorage.key(i));
             var storedPark = localStorage.key(i);
             var storedParkEl = document.createElement("li");
@@ -805,40 +806,45 @@ function addStoredParkToCard(parkName) {
 
     //create and fill card with park-data
     function fillCards(data) {
+        if(localStorage.length > 0) {
+            $("#defaultCard").addClass("hide");
+            
+            // //get image data which has img-url, img-name and img-descr
+            var images = data.data[0].images;
+            //create card append it to container and fill up with info from local storage
+            $('#cardParent').append(
+                $('<div/>')
+                    .attr("id", "cardNumb" + i)
+                    .addClass("col s5 m5 hoverable cardConteiner")
 
-        // //get image data which has img-url, img-name and img-descr
-        var images = data.data[0].images;
-        //create card append it to container and fill up with info from local storage
-        $('#cardParent').append(
-            $('<div/>')
-                .attr("id", "cardNumb" + i)
-                .addClass("col s5 m5 hoverable cardConteiner")
+                    .append(
+                        $('<div/>')
+                            .addClass("card")
 
-                .append(
-                    $('<div/>')
-                        .addClass("card")
+                            .append(
+                                $('<div/>')
+                                    .addClass("card-image")
 
-                        .append(
-                            $('<div/>')
-                                .addClass("card-image")
-
-                                .append(
-                                    $('<img/>')
-                                        .attr("id", "cardImg" + i)
-                                        .attr("src", images[i].url)
-                                        .addClass("aspect-ratio")
-                                )
-                                .append(
-                                    $('<span/>')
-                                        .attr("id", "cardName" + i)
-                                        .addClass("card-title")
-                                        .text(parkName)
-                                )
-                            //add <a> element ?
-                        )
-                )
-        );
-
+                                    .append(
+                                        $('<img/>')
+                                            .attr("id", "cardImg" + i)
+                                            .attr("src", images[i].url)
+                                            .addClass("aspect-ratio")
+                                    )
+                                    .append(
+                                        $('<span/>')
+                                            .attr("id", "cardName" + i)
+                                            .addClass("card-title")
+                                            .text(parkName)
+                                    )
+                            )
+                    )
+            );
+        }
+        else {
+            $("#defaultCard").removeClass("hide")
+        }
+        
         $('.card').append(
             $('<div/>')
                 .addClass("card-content")
