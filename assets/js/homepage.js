@@ -140,7 +140,7 @@ var parks = [
         "code": "hale"
     },
     {
-        "name": "Hawai’i Volcanoes",
+        "name": "Hawaii Volcanoes",
         "code": "havo"
     },
     {
@@ -370,11 +370,11 @@ var displayNatParkInfo = function (data) {
     var parkSearchArr = parkName.split(" National Park");
     var parkSearchCode = parkSearchArr[0];
     parkSearchCode = parkSearchCode.toLowerCase();
-    parkSearchCode = parkSearchCode.replaceAll(" ", "-");
-    parkSearchCode = parkSearchCode.replaceAll("ʻ","");
+    parkSearchCode = parkSearchCode.replaceAll(" ","-");
+    parkSearchCode = parkSearchCode.replaceAll(" ","");
     // parkSearchCode = parkSearchCode.join("");
 
-    $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
+    $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/");
 }
 //END FETCH AND DISPLAY OF BASIC PARK INFO 
 
@@ -462,7 +462,7 @@ var displayNatParkInfo = function (data) {
     var parkSearchCode = parkSearchArr[0];
     parkSearchCode = parkSearchCode.toLowerCase();
     parkSearchCode = parkSearchCode.replaceAll(" ", "-");
-    parkSearchCode = parkSearchCode.replaceAll("ʻ", "");
+    parkSearchCode = parkSearchCode.replaceAll(" ", "");
     // parkSearchCode = parkSearchCode.join("");
 
     $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
@@ -708,7 +708,7 @@ $(document).ready(function () {
             "Great Smoky Mountains": null,
             "Guadalupe Mountains": null,
             "Haleakala": null,
-            "Hawai’i Volcanoes": null,
+            "Hawaii Volcanoes": null,
             // "Harpers Ferry": null,
             "Hot Springs": null,
             "Isle Royale": null,
@@ -894,11 +894,11 @@ var display5Day = function(weather){
        //append forcast to div
         forecastContainerEl.appendChild(forecastEl);
     }
-
+};
 var addParkPrompt = function (submission) {
-    addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?"
+    addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?";
     $(".choices").removeClass("hide");
-}
+};
 searchBtnEl.addEventListener("click", formSubmitHandler);
 loadParks();
 
@@ -924,94 +924,7 @@ var formSubmitHandler = function (event) {
 };
 
 
-//Slideshow of NP photos
-$(document).ready(function () {
-    $('.slider').slider({
-        full_width: true,
-        height: 500,
-        interval: 8000
-    });
-});
-$(document).ready(function () {
 
-
-});
-
-// Input-search NP form
-$(document).ready(function () {
-    $('input#park-name').autocomplete({
-        data: {
-            "Denali": null,
-            "Gates of the Arctic": null,
-            "Glacier Bay": 'https://placehold.it/250x250',
-            "Acadia": null,
-            "American Samoa": null,
-            "Arches": null,
-            "Badlands": null,
-            "Big Bend": null,
-            "Biscayne": null,
-            "Black Canyon of the Gunnison": null,
-            "Bryce Canyon": null,
-            // "Cabrillo": null,
-            "Canyonlands": null,
-            "Capitol Reef": null,
-            "Carlsbad Caverns": null,
-            "Channel Islands": null,
-            "Congaree": null,
-            "Crater Lake": null,
-            "Cuyahoga Valley": null,
-            "Death Valley": null,
-            "Denali": null,
-            "Dry Tortugas": null,
-            "Everglades": null,
-            "Gates of the Arctic": null,
-            "Gateway Arch": null,
-            // "Gettysburg National Military Park": null,
-            "Glacier": null,
-            "Glacier Bay": null,
-            "Grand Canyon": null,
-            "Grand Teton": null,
-            "Great Basin": null,
-            "Great Sand Dunes": null,
-            "Great Smoky Mountains": null,
-            "Guadalupe Mountains": null,
-            "Haleakala": null,
-            "Hawai’i Volcanoes": null,
-            // "Harpers Ferry": null,
-            "Hot Springs": null,
-            "Isle Royale": null,
-            "Joshua Tree": null,
-            "Katmai": null,
-            "Kenai Fjords": null,
-            "Kings Canyon": null,
-            "Kobuk Valley": null,
-            "Lake Clark": null,
-            "Lassen Volcanic": null,
-            "Mammoth Cave": null,
-            "Mesa Verde": null,
-            "Mount Rainier": null,
-            "North Cascades": null,
-            // "Organ Pipe Cactus": null,
-            "Olympic": null,
-            "Petrified Forest": null,
-            "Pinnacles": null,
-            "Redwood": null,
-            "Rocky Mountain": null,
-            "Saguaro": null,
-            "Sequoia": null,
-            "Shenandoah": null,
-            "Theodore Roosevelt": null,
-            // "Valley Forge": null,
-            "Virgin Islands": null,
-            "Voyageurs": null,
-            "Wind Cave": null,
-            "Wrangell–St. Elias": null,
-            "Yellowstone": null,
-            "Yosemite": null,
-            "Zion": null,
-        },
-    });
-});
 
 function addStoredParkToCard(parkName) {
 
@@ -1146,7 +1059,7 @@ function addStoredParkToCard(parkName) {
 
 $("#check").click(function () {
     var parkName = $("#results").find("h2").text();
-    var priority = $('input[name=priority]:checked', '.choices').val()
+    var priority = $('input[name=priority]:checked', '.choices').val();
     console.log(parkName);
     console.log(priority);
     localStorage.setItem(parkName, JSON.stringify(priority));
@@ -1179,7 +1092,7 @@ var loadParks = function () {
 
             if (storedPriority === "High Priority") {
                 $(".store-high").removeClass("hide");
-                $("#defailtCard").addClass("hide")
+                $("#defailtCard").addClass("hide");
                 storeHighEl.append(storedParkEl);
                 addStoredParkToCard(storedPark);
             } else if (storedPriority === "Medium Priority") {
@@ -1192,7 +1105,7 @@ var loadParks = function () {
         }
     }
     $(".list-header li").addClass("list-item");
-}
+};
 
 
 searchBtnEl.addEventListener("click", formSubmitHandler);
