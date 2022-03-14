@@ -186,9 +186,10 @@ box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
     flex:auto;
 }
 
-=======
-box-shadow: red;
-color: #3498db;
+
+.input-field .prefix.active {
+  box-shadow: red;
+  color: #3498db;
 }
 
 .caption {
