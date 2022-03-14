@@ -9,6 +9,9 @@ var addParkEl = document.querySelector("#add-park");
 var storeHighEl = document.querySelector(".store-high");
 var storeMedEl = document.querySelector(".store-med");
 var storeLowEl = document.querySelector(".store-low");
+var apiKeyWeather = "VDnb8aw7KhRDLBsowfaPixWuDjegRJ83";
+var forecastContainerEl = document.querySelector("#fiveday-container");
+var forecastTitle = document.querySelector("#forecast");
 var i = 0;
 //park codes
 var parks = [
@@ -367,8 +370,8 @@ var displayNatParkInfo = function (data) {
     var parkSearchArr = parkName.split(" National Park");
     var parkSearchCode = parkSearchArr[0];
     parkSearchCode = parkSearchCode.toLowerCase();
-    parkSearchCode = parkSearchCode.replaceAll(" ", "-");
-    parkSearchCode = parkSearchCode.replaceAll("ʻ", "");
+    parkSearchCode = parkSearchCode.replaceAll(" ","-");
+    parkSearchCode = parkSearchCode.replaceAll("ʻ","");
     // parkSearchCode = parkSearchCode.join("");
 
     $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
@@ -513,12 +516,20 @@ var displayNatParkTours = function (data) {
         //get tour title
         var tourNameEl = document.createElement("h5");
         tourNameEl.textContent = toursArr[i].title + " ";
-        //append duration to the tour title
+        //append duration to the tour title and label it according to the unit and wheher the duration is a range or one specific length.
         var tourLengthEl = document.createElement("span");
         if (toursArr[i].durationUnit === "m") {
-            tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " minutes";
+            if (toursArr[i].durationMin === toursArr[i].durationMax) {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " minutes";
+            } else {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " minutes";
+            }
         } else if (toursArr[i].durationUnit === "h") {
-            tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " hours";
+            if (toursArr[i].durationMin === toursArr[i].durationMax) {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " hours";
+            } else {
+                tourLengthEl.textContent = " Duration: " + toursArr[i].durationMin + " - " + toursArr[i].durationMax + " hours";
+            }
         } else {
             tourLengthEl.textContent = " Duration Unspecified";
         }
@@ -534,7 +545,7 @@ var displayNatParkTours = function (data) {
 }
 //END FETCH AND DISPLAY OF TOURS
 
-var addParkPrompt = function (submission) {
+var addParkPrompt = function(submission) {
     addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?"
     $(".choices").removeClass("hide");
 }
@@ -548,13 +559,14 @@ var formSubmitHandler = function (event) {
     console.log(park.name);
     //If the user wrote a park, empty the input section and get the nat park info
     if (submission) {
-        clearItems();
-        getNatParkInfo(park.code);
-        getNatParkAlerts(park.code);
-        getNatParkToDos(park.code);
-        getNatParkTours(park.code);
-        addParkPrompt(submission);
-        nameInputEl.value = "";
+    clearItems();
+    getNatParkInfo(park.code);
+    getNatParkAlerts (park.code);
+    getNatParkToDos (park.code);
+    getNatParkTours(park.code);
+    addParkPrompt(submission);
+    get5Day(park.name);
+    nameInputEl.value = "";
     } else {
         alert("Please enter a National Park.");
     }
@@ -649,6 +661,169 @@ $(document).ready(function () {
         },
     });
 });
+
+
+
+///
+var createCards = function () {
+    //debugger;
+    for (let i = 0; i < 2; i++) {
+        //get code for each NP
+        var parkCard = parks[i].code;
+        //get data for each NP
+        getNPInfo(parkCard);
+
+        function getNPInfo (code) {
+            var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+            fetch(natParkUrl)
+                .then(function (response) {
+                    // request was successful
+                    if (response.ok) {
+                        response.json().then(function (data) {
+                            fillCards(data);
+                        });
+                    } else {
+                        alert('Error: National Park Not Found');
+                    }
+                })
+                .catch(function (error) {
+                    alert("Unable to connect to National Park API");
+                });
+        };
+
+        function fillCards(data) {
+            //get img, imgName and descr for each card on homepage
+            var images = data.data[0].images;
+
+            //post imgs
+            var index = ("cardImg" + i);
+            document.getElementById(index).src = images[i].url;
+            //post names for imgs
+            var indexN = ("cardName" + i);
+            document.getElementById(indexN).textContent = images[i].title;
+            //post descriptions for imgs
+            var indexD = ("cardDescr" + i);
+            document.getElementById(indexD).textContent = images[i].caption;
+
+        }
+    }
+}
+//
+createCards();
+
+
+$("#check").click(function(){
+    var parkName = $("#results").find("h2").text();
+    var priority = $('input[name=priority]:checked', '.choices').val()
+    console.log(parkName);
+    console.log(priority);
+    localStorage.setItem(parkName, JSON.stringify(priority));
+    loadParks();
+    // localStorage.setItem
+        
+});
+
+var loadParks = function(){
+    while (storeHighEl.firstChild) {
+        storeHighEl.removeChild(storeHighEl.firstChild);
+    };
+    storeHighEl.textContent= "High Priority Parks";
+    while (storeMedEl.firstChild) {
+        storeMedEl.removeChild(storeMedEl.firstChild);
+    };
+    storeMedEl.textContent= "Medium Priority Parks";
+    while (storeLowEl.firstChild) {
+        storeLowEl.removeChild(storeLowEl.firstChild);
+    };
+    storeLowEl.textContent= "Low Priority Parks";
+    for (var i=0; i<localStorage.length;i++) {
+        if (localStorage.key(i).match("National Park")) {
+            // console.log(localStorage.key(i));
+            var storedPark = localStorage.key(i);
+            var storedParkEl = document.createElement("li");
+            storedParkEl.textContent = storedPark;
+            var storedPriority = JSON.parse(localStorage.getItem(storedPark));
+            // console.log(storedPriority);
+            if (storedPriority === "High Priority") {
+                $(".store-high").removeClass("hide");
+                storeHighEl.append(storedParkEl);
+            }else if (storedPriority === "Medium Priority") {
+                $(".store-med").removeClass("hide");
+                storeMedEl.append(storedParkEl);
+            }else if (storedPriority === "Low Priority") {
+                $(".store-low").removeClass("hide");
+                storeLowEl.append(storedParkEl);
+            }
+        }
+    }
+    $(".list-header li").addClass("list-item");
+}
+
+//Weather API
+var get5Day = function(city){
+    var apiKey = "4ab2d4e1d400c9fddaeddcbd67c21dac"
+    var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`
+
+    fetch(apiURL)
+    .then(function(response){
+        response.json().then(function(data){
+            display5Day(data);
+           console.log(data);
+        });
+    });
+};
+
+var display5Day = function(weather){
+    forecastContainerEl.textContent = ""
+    forecastTitle.textContent = "5-Day Forecast:";
+    console.log(weather);
+    var forecast = weather.list;
+        for(var i=5; i < forecast.length; i=i+8){
+       var dailyForecast = forecast[i];
+        
+       
+       var forecastEl=document.createElement("div");
+       forecastEl.classList = "card bg-primary text-light m-2";
+
+       var forecastDate = document.createElement("h5")
+       forecastDate.textContent= moment.unix(dailyForecast.dt).format("MMM D, YYYY");
+       forecastDate.classList = "card-header text-center"
+       forecastEl.appendChild(forecastDate);
+
+       var weatherIcon = document.createElement("img")
+       weatherIcon.classList = "card-body text-center";
+       weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png`);  
+
+       //append weather
+       forecastEl.appendChild(weatherIcon);
+       
+       //make element for temp
+       var forecastTempEl=document.createElement("span");
+       forecastTempEl.classList = "card-body text-center";
+       forecastTempEl.textContent = dailyForecast.main.temp + " °F";
+        forecastEl.appendChild(forecastTempEl);
+
+       var forecastHumEl=document.createElement("span");
+       forecastHumEl.classList = "card-body text-center";
+       forecastHumEl.textContent = dailyForecast.main.humidity + "  %";
+       forecastEl.appendChild(forecastHumEl);
+
+       //append forcast to div
+        forecastContainerEl.appendChild(forecastEl);
+    }
+}
+
+var addParkPrompt = function (submission) {
+    addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?"
+    $(".choices").removeClass("hide");
+
+}
+searchBtnEl.addEventListener("click", formSubmitHandler);
+loadParks();
+
+
+
+
 
 function addStoredParkToCard(parkName) {
 
@@ -779,59 +954,3 @@ function addStoredParkToCard(parkName) {
 //         }
 //     }
 // }
-
-
-$("#check").click(function () {
-    var parkName = $("#results").find("h2").text();
-    var priority = $('input[name=priority]:checked', '.choices').val()
-    console.log(parkName);
-    console.log(priority);
-    localStorage.setItem(parkName, JSON.stringify(priority));
-    loadParks();
-    // localStorage.setItem
-
-});
-
-var loadParks = function () {
-    while (storeHighEl.firstChild) {
-        storeHighEl.removeChild(storeHighEl.firstChild);
-    };
-    storeHighEl.textContent = "High Priority Parks";
-    while (storeMedEl.firstChild) {
-        storeMedEl.removeChild(storeMedEl.firstChild);
-    };
-    storeMedEl.textContent = "Medium Priority Parks";
-    while (storeLowEl.firstChild) {
-        storeLowEl.removeChild(storeLowEl.firstChild);
-    };
-    storeLowEl.textContent = "Low Priority Parks";
-    for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).match("National Park")) {
-            // console.log(localStorage.key(i));
-            var storedPark = localStorage.key(i);
-            var storedParkEl = document.createElement("li");
-            storedParkEl.textContent = storedPark;
-            var storedPriority = JSON.parse(localStorage.getItem(storedPark));
-            // console.log(storedPriority);
-
-            if (storedPriority === "High Priority") {
-                $(".store-high").removeClass("hide");
-                $("#defailtCard").addClass("hide")
-                storeHighEl.append(storedParkEl);
-                addStoredParkToCard(storedPark);
-            } else if (storedPriority === "Medium Priority") {
-                $(".store-med").removeClass("hide");
-                storeMedEl.append(storedParkEl);
-            } else if (storedPriority === "Low Priority") {
-                $(".store-low").removeClass("hide");
-                storeLowEl.append(storedParkEl);
-            }
-        }
-    }
-    $(".list-header li").addClass("list-item");
-}
-
-
-searchBtnEl.addEventListener("click", formSubmitHandler);
-
-loadParks();

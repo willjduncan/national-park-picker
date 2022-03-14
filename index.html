@@ -35,9 +35,8 @@
         <li>
           <img id="img0" src="https://wallpapercave.com/wp/wp4738979.jpg">
           <div class="caption center-align">
-            <h3 id="imgName0">The National Park Service protects over 84 million acres of wild landscapes and historic
-              sites.</h3>
-            <h5 id="descr0"></h5>
+            <h3 id="imgName0">The National Park Service protects over 84 million acres of wild landscapes and historic sites.</h3>
+            <h5 id="descr0" ></h5>
           </div>
         </li>
         <li>
@@ -71,7 +70,7 @@
   <!-- Search-Results block -->
   <div class="row">
     <!-- Search/input form -->
-    <div class="col s3">
+    <div class="col s12 m3">
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">chevron_right</i>
@@ -90,15 +89,12 @@
 
     <!-- alerts -->
     <div class="col s9" id="alerts"></div>
-
     <div class="col s9" id="add-park"></div>
-
     <div class="choices hide">
       <div>
         <input type="radio" class="radio-btn" id="high-p" name="priority" value="High Priority" checked>
         <label for="high-p">High Priority</label>
       </div>
-
       <div>
         <input type="radio" class="radio-btn" id="med-p" name="priority" value="Medium Priority">
         <label for="med-p">Medium Priority</label>
@@ -111,10 +107,8 @@
       <input type="button" class="radio-btn" id="check" name="check" value="Add Park">
     </div>
 
-
     <!-- Results shows here -->
     <div class="col s9" id="results">
-
       <div id="cardParent" class="row">
    <div id="defailtCard" class="col s5 m5 hoverable cardConteiner">
           <div class="card">
@@ -129,28 +123,31 @@
           </div>
         </div>
 
-
+        <div class="col s6 m5 cardConteiner hoverable">
+          <div class="card">
+            <div class="card-image">
+              <img id="cardImg1" class="result" src="https://wallpapercave.com/wp/wp4738979.jpg">
+              <span id="cardName1" class="card-title">Card Title</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+              <p id="cardDescr1">I am a very simple card. I am good at containing small bits of information. I am convenient because I
+                require little markup to use effectively.</p>
+            </div>
+          </div>
+        </div>
       </div>
-
-
-
-
 
     </div>
     <div id="activities" class="col s9"></div>
     <div id="tours" class="col s9"></div>
-
+</div>  
   </div>
-
-
-
-
-  <!-- <div class="row">
-    <div class="col s3" id="input">
-    </div> -->
-
-
-
+  <!--Weather Container-->
+  <div class = "row border" id = "five-day-forecast">
+    <h2 class= "col-12" id = "forecast"></h2>
+    <div class = "d-flex" id = "fiveday-container">
+  </div>
   <div></div>
   <footer class="page-footer">
     <div class="container">
@@ -188,7 +185,9 @@
   <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
   <script src="./assets/js/homepage.js"></script>
+
 
 </body>
 
