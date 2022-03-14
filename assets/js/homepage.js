@@ -775,6 +775,18 @@ var display5Day = function(weather){
        
        var forecastEl=document.createElement("div");
        forecastEl.classList = "card bg-primary text-light m-2";
+
+       var forecastDate = document.createElement("h5")
+       forecastDate.textContent= moment.unix(dailyForecast.dt).format("MMM D, YYYY");
+       forecastDate.classList = "card-header text-center"
+       forecastEl.appendChild(forecastDate);
+
+       var weatherIcon = document.createElement("img")
+       weatherIcon.classList = "card-body text-center";
+       weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png`);  
+
+       //append weather
+       forecastEl.appendChild(weatherIcon);
        
        //make element for temp
        var forecastTempEl=document.createElement("span");
