@@ -12,6 +12,7 @@ var storeLowEl = document.querySelector(".store-low");
 var apiKeyWeather = "VDnb8aw7KhRDLBsowfaPixWuDjegRJ83";
 var forecastContainerEl = document.querySelector("#fiveday-container");
 var forecastTitle = document.querySelector("#forecast");
+var i = 0;
 //park codes
 var parks = [
     {
@@ -371,6 +372,97 @@ var displayNatParkInfo = function (data) {
     parkSearchCode = parkSearchCode.toLowerCase();
     parkSearchCode = parkSearchCode.replaceAll(" ", "-");
     parkSearchCode = parkSearchCode.replaceAll("ʻ","");
+    // parkSearchCode = parkSearchCode.join("");
+
+    $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
+}
+//END FETCH AND DISPLAY OF BASIC PARK INFO 
+
+
+//BEGIN FETCH AND DISPLAY FOR BASIC NAT PARK INFO
+var getNatParkInfo = function (code) {
+    var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    fetch(natParkUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json().then(function (data) {
+                    displayNatParkInfo(data);
+                });
+            } else {
+                alert('Error: National Park Not Found');
+            }
+        })
+        .catch(function (error) {
+            alert("Unable to connect to National Park API");
+        });
+};
+
+var displayNatParkInfo = function (data) {
+    console.log("BASIC INFO: ");
+    console.log(data);
+    $("#desc-link").removeClass("hide");
+    //Display National Park name as a title
+    var name = data.data[0].fullName;
+    var titleEl = document.createElement("h2");
+    titleEl.textContent = name;
+    titleEl.setAttribute("id", "desc-header");
+    resultsEl.append(titleEl);
+    //display description beneath the title
+    var description = data.data[0].description;
+    var descriptionEl = document.createElement("p");
+    descriptionEl.textContent = description;
+    resultsEl.append(descriptionEl);
+    //display address
+    var line1 = data.data[0].addresses[0].line1;
+    var line2 = data.data[0].addresses[0].line2;
+    var city = data.data[0].addresses[0].city;
+    var state = data.data[0].addresses[0].stateCode;
+    var zip = data.data[0].addresses[0].postalCode;
+    var addressTitleEl = document.createElement("span");
+    addressTitleEl.textContent = "Address: ";
+    addressTitleEl.setAttribute("style", "font-weight:bold;");
+    var addressEl = document.createElement("span");
+    if (!line2) {
+        addressEl.textContent = line1 + ", " + city + ", " + state + " " + zip;
+    } else {
+        addressEl.textContent = line1 + ", " + line2 + ", " + city + ", " + state + " " + zip;
+    }
+    addressEl.setAttribute("style", "font-style:italic;");
+    var allAddressEl = document.createElement("p");
+    allAddressEl.append(addressTitleEl);
+    allAddressEl.append(addressEl);
+    resultsEl.append(allAddressEl);
+    //display directions
+    var directions = data.data[0].directionsInfo;
+    var directionsEl = document.createElement("p");
+    directionsEl.textContent = directions;
+    resultsEl.append(directionsEl);
+    //display new pictures for slider
+    console.log("IMAGES: ");
+    console.log(data.data[0].images);
+    var images = data.data[0].images;
+    for (var i = 0; i < 4; i++) {
+        //post imgs
+        var index = ("img" + i);
+        document.getElementById(index).src = images[i].url;
+        //post names for imgs
+        var indexN = ("imgName" + i);
+        document.getElementById(indexN).textContent = images[i].title;
+        //post descriptions for imgs
+        var indexD = ("descr" + i);
+        document.getElementById(indexD).textContent = images[i].caption;
+    }
+    //replace links in the footer for nps, rec.gov, and npmaps to reflect the searched park
+    var newUrl = data.data[0].url;
+    $("#nat-park-site").attr("href", newUrl);
+    var parkName = $("#results").find("h2").text();
+    $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
+    var parkSearchArr = parkName.split(" National Park");
+    var parkSearchCode = parkSearchArr[0];
+    parkSearchCode = parkSearchCode.toLowerCase();
+    parkSearchCode = parkSearchCode.replaceAll(" ", "-");
+    parkSearchCode = parkSearchCode.replaceAll("ʻ", "");
     // parkSearchCode = parkSearchCode.join("");
 
     $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
@@ -803,7 +895,306 @@ var display5Day = function(weather){
         forecastContainerEl.appendChild(forecastEl);
     }
 
+var addParkPrompt = function (submission) {
+    addParkEl.textContent = "Add " + submission + " National Park to your Must-Visit list?"
+    $(".choices").removeClass("hide");
 }
 searchBtnEl.addEventListener("click", formSubmitHandler);
 loadParks();
 
+//TO HANDLE THE PARK SUBMISSION BUTTON
+var formSubmitHandler = function (event) {
+    event.preventDefault();
+    // get value from input element
+    var submission = nameInputEl.value.trim();
+    var park = parks.find(park => park.name === submission);
+    console.log(park.name);
+    //If the user wrote a park, empty the input section and get the nat park info
+    if (submission) {
+        clearItems();
+        getNatParkInfo(park.code);
+        getNatParkAlerts(park.code);
+        getNatParkToDos(park.code);
+        getNatParkTours(park.code);
+        addParkPrompt(submission);
+        nameInputEl.value = "";
+    } else {
+        alert("Please enter a National Park.");
+    }
+};
+
+
+//Slideshow of NP photos
+$(document).ready(function () {
+    $('.slider').slider({
+        full_width: true,
+        height: 500,
+        interval: 8000
+    });
+});
+$(document).ready(function () {
+
+
+});
+
+// Input-search NP form
+$(document).ready(function () {
+    $('input#park-name').autocomplete({
+        data: {
+            "Denali": null,
+            "Gates of the Arctic": null,
+            "Glacier Bay": 'https://placehold.it/250x250',
+            "Acadia": null,
+            "American Samoa": null,
+            "Arches": null,
+            "Badlands": null,
+            "Big Bend": null,
+            "Biscayne": null,
+            "Black Canyon of the Gunnison": null,
+            "Bryce Canyon": null,
+            // "Cabrillo": null,
+            "Canyonlands": null,
+            "Capitol Reef": null,
+            "Carlsbad Caverns": null,
+            "Channel Islands": null,
+            "Congaree": null,
+            "Crater Lake": null,
+            "Cuyahoga Valley": null,
+            "Death Valley": null,
+            "Denali": null,
+            "Dry Tortugas": null,
+            "Everglades": null,
+            "Gates of the Arctic": null,
+            "Gateway Arch": null,
+            // "Gettysburg National Military Park": null,
+            "Glacier": null,
+            "Glacier Bay": null,
+            "Grand Canyon": null,
+            "Grand Teton": null,
+            "Great Basin": null,
+            "Great Sand Dunes": null,
+            "Great Smoky Mountains": null,
+            "Guadalupe Mountains": null,
+            "Haleakala": null,
+            "Hawai’i Volcanoes": null,
+            // "Harpers Ferry": null,
+            "Hot Springs": null,
+            "Isle Royale": null,
+            "Joshua Tree": null,
+            "Katmai": null,
+            "Kenai Fjords": null,
+            "Kings Canyon": null,
+            "Kobuk Valley": null,
+            "Lake Clark": null,
+            "Lassen Volcanic": null,
+            "Mammoth Cave": null,
+            "Mesa Verde": null,
+            "Mount Rainier": null,
+            "North Cascades": null,
+            // "Organ Pipe Cactus": null,
+            "Olympic": null,
+            "Petrified Forest": null,
+            "Pinnacles": null,
+            "Redwood": null,
+            "Rocky Mountain": null,
+            "Saguaro": null,
+            "Sequoia": null,
+            "Shenandoah": null,
+            "Theodore Roosevelt": null,
+            // "Valley Forge": null,
+            "Virgin Islands": null,
+            "Voyageurs": null,
+            "Wind Cave": null,
+            "Wrangell–St. Elias": null,
+            "Yellowstone": null,
+            "Yosemite": null,
+            "Zion": null,
+        },
+    });
+});
+
+function addStoredParkToCard(parkName) {
+
+    //get code for each NP
+    var park = parkName.replace(' National Park', '');
+
+    function isPark(NP) {
+        return NP.name === park;
+    }
+    console.log(parks.find(isPark).code);
+    var parkCode = parks.find(isPark).code;
+
+    //get data for each NP
+    getNPInfo(parkCode);
+
+    function getNPInfo(code) {
+
+        var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+        fetch(natParkUrl)
+            .then(function (response) {
+                // request was successful
+                if (response.ok) {
+                    response.json().then(function (data) {
+                        fillCards(data);
+                    });
+                } else {
+                    alert('Error: National Park Not Found');
+                }
+            })
+            .catch(function (error) {
+                alert("Unable to connect to National Park API");
+            });
+        };
+        
+        function fillCards(data) {
+
+        // //get img, imgName and descr for each card on homepage
+         var images = data.data[0].images;
+        //create card append it to container and fill up with info from local storage
+        $('#cardParent').append(
+            $('<div/>')
+            .addClass("col s5 m5 hoverable cardConteiner")
+            
+            .append(
+                $('<div/>')
+                .addClass("card")
+            
+                .append(
+                    $('<div/>')
+                    .addClass("card-image")
+                    
+                    .append(
+                        $('<img/>')
+                        .attr("id", "cardImg" + i)
+                        .attr("src", images[i].url)
+                        .addClass("aspect-ratio")
+                    )
+                    .append(
+                        $('<span/>')
+                        .attr("id", "cardName" + i)
+                        .addClass("card-title")
+                        .text(parkName)
+                    )
+                    //add <a> element 
+                )
+            )
+        );
+
+        $('.card').append(
+            $('<div/>')
+            .addClass("card-content")
+            .append(
+                $('<p/>')
+                .attr("id", "cardDescr" + i)
+                .text(images[i].caption)
+            )
+        )
+
+        i++;
+
+    }
+
+
+
+
+};
+
+// Create cards of favorite NPs
+// var createCards = function () {
+//     for (let i = 0; i < 2; i++) {
+//         //get code for each NP
+//         var parkCard = parks[i].code;
+//         //get data for each NP
+//         getNPInfo(parkCard);
+
+//         function getNPInfo (code) {
+//             var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+//             fetch(natParkUrl)
+//                 .then(function (response) {
+//                     // request was successful
+//                     if (response.ok) {
+//                         response.json().then(function (data) {
+//                             fillCards(data);
+//                         });
+//                     } else {
+//                         alert('Error: National Park Not Found');
+//                     }
+//                 })
+//                 .catch(function (error) {
+//                     alert("Unable to connect to National Park API");
+//                 });
+//         };
+
+//         function fillCards(data) {
+//             //get img, imgName and descr for each card on homepage
+//             var images = data.data[0].images;
+
+//             //post imgs
+//             var index = ("cardImg" + i);
+//             document.getElementById(index).src = images[i].url;
+//             //post names for imgs
+//             var indexN = ("cardName" + i);
+//             document.getElementById(indexN).textContent = images[i].title;
+//             //post descriptions for imgs
+//             var indexD = ("cardDescr" + i);
+//             document.getElementById(indexD).textContent = images[i].caption;
+
+//         }
+//     }
+// }
+
+
+$("#check").click(function () {
+    var parkName = $("#results").find("h2").text();
+    var priority = $('input[name=priority]:checked', '.choices').val()
+    console.log(parkName);
+    console.log(priority);
+    localStorage.setItem(parkName, JSON.stringify(priority));
+    loadParks();
+    // localStorage.setItem
+
+});
+
+var loadParks = function () {
+    while (storeHighEl.firstChild) {
+        storeHighEl.removeChild(storeHighEl.firstChild);
+    };
+    storeHighEl.textContent = "High Priority Parks";
+    while (storeMedEl.firstChild) {
+        storeMedEl.removeChild(storeMedEl.firstChild);
+    };
+    storeMedEl.textContent = "Medium Priority Parks";
+    while (storeLowEl.firstChild) {
+        storeLowEl.removeChild(storeLowEl.firstChild);
+    };
+    storeLowEl.textContent = "Low Priority Parks";
+    for (var i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).match("National Park")) {
+            // console.log(localStorage.key(i));
+            var storedPark = localStorage.key(i);
+            var storedParkEl = document.createElement("li");
+            storedParkEl.textContent = storedPark;
+            var storedPriority = JSON.parse(localStorage.getItem(storedPark));
+            // console.log(storedPriority);
+
+            if (storedPriority === "High Priority") {
+                $(".store-high").removeClass("hide");
+                $("#defailtCard").addClass("hide")
+                storeHighEl.append(storedParkEl);
+                addStoredParkToCard(storedPark);
+            } else if (storedPriority === "Medium Priority") {
+                $(".store-med").removeClass("hide");
+                storeMedEl.append(storedParkEl);
+            } else if (storedPriority === "Low Priority") {
+                $(".store-low").removeClass("hide");
+                storeLowEl.append(storedParkEl);
+            }
+        }
+    }
+    $(".list-header li").addClass("list-item");
+}
+
+
+searchBtnEl.addEventListener("click", formSubmitHandler);
+
+loadParks();

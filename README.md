@@ -56,6 +56,11 @@ WHEN I look at the README file
 THEN I see quality in the flesh staring right back at me (with unique name, description, technologies used, screenshot, and link to deployed application).
 
 
+We began the project by picking our API's, CSS library, and creating a wireframe. Using the acquired API key, we found a way to first pull the basic national park information for one specific national park. Once that was possible, it was linked to a search button by using an array with all the park codes to substitute in the fetch. Once one fetch was made, it was fairly easy to add fetches for alerts, things to do, and tours as well. They each had to be displayed in their own div element to make sure each feature populated the right part of the screen regardless of load time. 
+
+From there, we added features to improve the website: autofill for the search bar, a photo slideshow at the top, and dynamic links to further resources. Next, we added the ability to save national parks according to priority, and then display the high priority parks to the homescreen. 
+
+<!-- ADD ADDITIONAL DEVELOPMENTS TO THE DESCRIPTION PLUS ANY MAJOR ISSUES OVERCOME -->
 
 
 ## Installation
