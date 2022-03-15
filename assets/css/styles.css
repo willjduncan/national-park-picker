@@ -248,7 +248,7 @@ overflow: hidden;
 }
 
 .cardConteiner {
-  cursor: url(/assets/images/frozen-panther.png), auto;
+  cursor: url(../images/frozen-panther.png), auto;
 }
 
 /* .card-content {
