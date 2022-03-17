@@ -13,7 +13,8 @@ var apiKeyWeather = "VDnb8aw7KhRDLBsowfaPixWuDjegRJ83";
 var forecastContainerEl = document.querySelector("#fiveday-container");
 var forecastTitle = document.querySelector("#forecast");
 var i = 0;
-
+var natParkUrl;
+var parkName;
 // START ARRAY OF PARK CODES
 var parks = [
     {
@@ -225,6 +226,7 @@ var parks = [
         "code": "sagu"
     },
     {
+        //the same as kings canyon
         "name": "Sequoia",
         "code": "seki"
     },
@@ -291,24 +293,25 @@ var clearItems = function () {
 
 //BEGIN FETCH AND DISPLAY FOR BASIC NAT PARK INFO
 var getNatParkInfo = function (code) {
-    var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
-
-    fetch(natParkUrl)
-        .then(function (response) {
-            // request was successful
-            if (response.ok) {
-                response.json().then(function (data) {
-                    displayNatParkInfo(data);
-                });
-            } else {
-                modalParkNotFound();
-                //alert('Error: National Park Not Found');
-            }
-        })
-        .catch(function (error) {
-            modalUnableToConnect();
-            // alert("Unable to connect to National Park API");
-        });
+    natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    alerts(natParkUrl);
+    // DRY
+    // fetch(natParkUrl)
+    //     .then(function (response) {
+    //         // request was successful
+    //         if (response.ok) {
+    //             response.json().then(function (data) {
+    //                 displayNatParkInfo(data);
+    //             });
+    //         } else {
+    //             modalParkNotFound();
+    //             //alert('Error: National Park Not Found');
+    //         }
+    //     })
+    //     .catch(function (error) {
+    //         modalUnableToConnect();
+    //         // alert("Unable to connect to National Park API");
+    //     });
 };
 
 var displayNatParkInfo = function (data) {
@@ -356,20 +359,30 @@ var displayNatParkInfo = function (data) {
     console.log(data.data[0].images);
     var images = data.data[0].images;
     for (var i = 0; i < 4; i++) {
-        //post imgs
         var index = ("img" + i);
-        document.getElementById(index).src = images[i].url;
-        //post names for imgs
         var indexN = ("imgName" + i);
-        document.getElementById(indexN).textContent = images[i].title;
-        //post descriptions for imgs
         var indexD = ("descr" + i);
-        document.getElementById(indexD).textContent = images[i].caption;
+        //in case if National Park have at least 4 photos
+        if (i < images.length) {
+            //post imgs            
+            document.getElementById(index).src = images[i].url;
+            //post names for imgs
+            document.getElementById(indexN).textContent = images[i].title;
+            //post descriptions for imgs
+            document.getElementById(indexD).textContent = images[i].caption;
+        }
+        //in case they don't have enough photos for slideshow
+        else {
+            document.getElementById(index).src = "https://comfort-frankfurt.com/wp-content/uploads/2018/06/uhfuehfuh-1.jpg";
+            document.getElementById(indexN).textContent = "We are sorry! National Park didn't provide any more photos :(";
+            document.getElementById(indexD).textContent = "But! You can contact us to place your advertisement here!";
+        }
+
     }
     //replace links in the footer for nps, rec.gov, and npmaps to reflect the searched park
     var newUrl = data.data[0].url;
     $("#nat-park-site").attr("href", newUrl);
-    var parkName = $("#results").find("h2").text();
+    parkName = $("#results").find("h2").text();
     $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
     //////////////////////////////////////////////////////////  FIX AN ISSUE FOR [national and state parkS]  //////////////////////////////////////////////
     var parkSearchArr = parkName.split(" National Park");
@@ -385,13 +398,47 @@ var displayNatParkInfo = function (data) {
 
 // BEGIN FETCH AND DISPLAY OF PARK ALERTS
 var getNatParkAlerts = function (code) {
-    var natParkUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    natParkUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    alerts(natParkUrl);
+    // DRY
+    // fetch(natParkUrl)
+    //     .then(function (response) {
+    //         // request was successful
+    //         if (response.ok) {
+    //             response.json().then(function (data) {
+    //                 displayNatParkAlerts(data);
+    //             });
+    //         } else {
+    //             modalParkNotFound();
+    //             //alert('Error: National Park Not Found');
+    //         }
+    //     })
+    //     .catch(function (error) {
+    //         modalUnableToConnect();
+    //         //alert("Unable to connect to National Park API");
+    //     });
+};
+// local storage lines 387 737 849
+function alerts(natParkUrl) {
     fetch(natParkUrl)
         .then(function (response) {
             // request was successful
             if (response.ok) {
                 response.json().then(function (data) {
-                    displayNatParkAlerts(data);
+                    if (natParkUrl.toLowerCase().indexOf("parks") >= 0) {
+                        displayNatParkInfo(data);
+                        //fillCards(data);
+                    }
+                    else if (natParkUrl.toLowerCase().indexOf("alerts") >= 0) {
+                        displayNatParkAlerts(data);
+                    }
+                    else if (natParkUrl.toLowerCase().indexOf("thingstodo") >= 0) {
+                        displayNatParkToDos(data);
+                    }
+                    //867 delete?
+                    else if (natParkUrl.toLowerCase().indexOf("tours") >= 0) {
+                        displayNatParkTours(data);
+                    }
                 });
             } else {
                 modalParkNotFound();
@@ -402,7 +449,8 @@ var getNatParkAlerts = function (code) {
             modalUnableToConnect();
             //alert("Unable to connect to National Park API");
         });
-};
+}
+
 
 var displayNatParkAlerts = function (data) {
     // console.log(data);
@@ -421,23 +469,25 @@ var displayNatParkAlerts = function (data) {
 
 //BEGIN FETCH AND DISPLAY OF THINGS TO DO
 var getNatParkToDos = function (code) {
-    var natParkUrl = "https://developer.nps.gov/api/v1/thingstodo?parkCode=" + code + "&api_key=" + apiKeyNatPark;
-    fetch(natParkUrl)
-        .then(function (response) {
-            // request was successful
-            if (response.ok) {
-                response.json().then(function (data) {
-                    displayNatParkToDos(data);
-                });
-            } else {
-                modalParkNotFound();
-                //alert('Error: National Park Not Found');
-            }
-        })
-        .catch(function (error) {
-            modalUnableToConnect();
-            //alert("Unable to connect to National Park API");
-        });
+    natParkUrl = "https://developer.nps.gov/api/v1/thingstodo?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    // 
+    alerts(natParkUrl);
+    // fetch(natParkUrl)
+    //     .then(function (response) {
+    //         // request was successful
+    //         if (response.ok) {
+    //             response.json().then(function (data) {
+    //                 displayNatParkToDos(data);
+    //             });
+    //         } else {
+    //             modalParkNotFound();
+    //             //alert('Error: National Park Not Found');
+    //         }
+    //     })
+    //     .catch(function (error) {
+    //         modalUnableToConnect();
+    //         //alert("Unable to connect to National Park API");
+    //     });
 };
 
 var displayNatParkToDos = function (data) {
@@ -490,23 +540,25 @@ var displayNatParkToDos = function (data) {
 
 //BEGIN FETCH AND DISPLAY OF TOURS
 var getNatParkTours = function (code) {
-    var natParkUrl = "https://developer.nps.gov/api/v1/tours?parkCode=" + code + "&api_key=" + apiKeyNatPark;
-    fetch(natParkUrl)
-        .then(function (response) {
-            // request was successful
-            if (response.ok) {
-                response.json().then(function (data) {
-                    displayNatParkTours(data);
-                });
-            } else {
-                modalParkNotFound();
-                //alert('Error: National Park Not Found');
-            }
-        })
-        .catch(function (error) {
-            modalUnableToConnect();
-            //alert("Unable to connect to National Park API");
-        });
+    natParkUrl = "https://developer.nps.gov/api/v1/tours?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+    alerts(natParkUrl);
+    // DRY
+    // fetch(natParkUrl)
+    //     .then(function (response) {
+    //         // request was successful
+    //         if (response.ok) {
+    //             response.json().then(function (data) {
+    //                 displayNatParkTours(data);
+    //             });
+    //         } else {
+    //             modalParkNotFound();
+    //             //alert('Error: National Park Not Found');
+    //         }
+    //     })
+    //     .catch(function (error) {
+    //         modalUnableToConnect();
+    //         //alert("Unable to connect to National Park API");
+    //     });
 };
 
 var displayNatParkTours = function (data) {
@@ -806,20 +858,24 @@ loadParks();
 
 
 // PULL HIGH PRIORITY CARDS FROM LOCAL STORAGE AND CREATE/FILL CARDS FOR HOMEPAGE
-function addStoredParkToCard(parkName) {
+function addStoredParkToCard(parkToSave) {
     //remove end part of str to get name from "parks" array
-    var park = parkName.replace(' National Park', '');
+    var park = parkToSave.replace(' National Park', '');
     //check array for name 
     function isPark(NP) {
         return NP.name === park;
     }
     //parkCode = code of chosen park
     var parkCode = parks.find(isPark).code;
+
+    //////////////////////////////////////
     getNPInfo(parkCode);
+    //maybe getNatParkInfo(parkCode); ?? and delete next function
 
     //get data for park
     function getNPInfo(code) {
-        var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+        natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
+        //alerts(natParkUrl);
         fetch(natParkUrl)
             .then(function (response) {
                 // request was successful
@@ -838,58 +894,58 @@ function addStoredParkToCard(parkName) {
             });
     };
 
-    //create and fill card with park-data
-    function fillCards(data) {
-        if (localStorage.length > 0) {
-            $("#defaultCard").addClass("hide");
+};
+//create and fill card with park-data
+function fillCards(data) {
+    if (localStorage.length > 0) {
+        $("#defaultCard").addClass("hide");
 
-            // //get image data which has img-url, img-name and img-descr
-            var images = data.data[0].images;
-            //create card append it to container and fill up with info from local storage
-            $('#cardParent').append(
-                $('<div/>')
-                    .attr("id", "cardNumb" + i)
-                    .addClass("col s5 m5 hoverable cardConteiner")
-
-                    .append(
-                        $('<div/>')
-                            .addClass("card")
-
-                            .append(
-                                $('<div/>')
-                                    .addClass("card-image")
-
-                                    .append(
-                                        $('<img/>')
-                                            .attr("id", "cardImg" + i)
-                                            .attr("src", images[i].url)
-                                            .addClass("aspect-ratio")
-                                    )
-                                    .append(
-                                        $('<span/>')
-                                            .attr("id", "cardName" + i)
-                                            .addClass("card-title")
-                                            .text(parkName)
-                                    )
-                            )
-                    )
-            );
-        }
-        else {
-            $("#defaultCard").removeClass("hide")
-        }
-
-        $('.card').append(
+        // //get image data which has img-url, img-name and img-descr
+        var images = data.data[0].images;
+        //create card append it to container and fill up with info from local storage
+        $('#cardParent').append(
             $('<div/>')
-                .addClass("card-content")
+                .attr("id", "cardNumb" + i)
+                .addClass("col s5 m5 hoverable cardConteiner")
+
                 .append(
-                    $('<p/>')
-                        .attr("id", "cardDescr" + i)
-                        .text(images[i].caption)
+                    $('<div/>')
+                        .addClass("card")
+
+                        .append(
+                            $('<div/>')
+                                .addClass("card-image")
+
+                                .append(
+                                    $('<img/>')
+                                        .attr("id", "cardImg" + i)
+                                        .attr("src", images[i].url)
+                                        .addClass("aspect-ratio")
+                                )
+                                .append(
+                                    $('<span/>')
+                                        .attr("id", "cardName" + i)
+                                        .addClass("card-title")
+                                        .text(parkName)
+                                )
+                        )
                 )
-        )
-        i++;
+        );
     }
+    else {
+        $("#defaultCard").removeClass("hide")
+    }
+
+    $('.card').append(
+        $('<div/>')
+            .addClass("card-content")
+            .append(
+                $('<p/>')
+                    .attr("id", "cardDescr" + i)
+                    .text(images[i].caption)
+            )
+    )
+    i++;
 };
 
 
