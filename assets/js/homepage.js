@@ -15,6 +15,7 @@ var forecastTitle = document.querySelector("#forecast");
 var i = 0;
 var natParkUrl;
 var parkName;
+var park;
 
 // START ARRAY OF PARK CODES
 var parks = [
@@ -552,7 +553,7 @@ var formSubmitHandler = function (event) {
     event.preventDefault();
     // get value from input element
     var submission = nameInputEl.value.trim();
-    var park = parks.find(park => park.name === submission);
+    park = parks.find(park => park.name === submission);
     console.log(park.name);
     //If the user wrote a park, empty the input section and get the nat park info
     if (submission) {
@@ -595,7 +596,7 @@ function loadParks () {
     storeLowEl.textContent = "Low Priority Parks";
     for (var i = 0; i < localStorage.length; i++) {
         //////////////////////////////////////////////////////////////fix case with " national and state parks"/////////////////////////////////
-        if (localStorage.key(i).match("National Park")) {
+        //if (localStorage.key(i).match("National Park")) {
             //$("#defaultCard").addClass("hide");
             // console.log(localStorage.key(i));
             var storedPark = localStorage.key(i);
@@ -614,7 +615,7 @@ function loadParks () {
                 $(".store-low").removeClass("hide");
                 storeLowEl.append(storedParkEl);
             }
-        }
+       // }
     }
     $(".list-header li").addClass("list-item");
 }
@@ -862,13 +863,14 @@ $(document).ready(function () {
 });
 
 // "FIND PARK" BUTTON
-$("#check").click(function () {
-    parkName = $("#results").find("h2").text();
+$("#check").click(function (data) {
+    //parkName = $("#results").find("h2").text();
+    var parkN = park.name;
     var priority = $('input[name=priority]:checked', '.choices').val()
     console.log(data);
-    console.log(parkName);
+    console.log(parkN);
     console.log(priority);
-    localStorage.setItem(parkName, JSON.stringify(priority));
+    localStorage.setItem(parkN, JSON.stringify(priority));
     loadParks();
     // localStorage.setItem
 
