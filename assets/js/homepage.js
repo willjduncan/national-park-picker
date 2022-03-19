@@ -713,6 +713,7 @@ function addStoredParkToCard(parkToSave) {
     getNPInfo(parkCode);
     //maybe getNatParkInfo(parkCode); ?? and delete next function
 };
+
 //pull park data for card
 function getNPInfo(code) {
     natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
@@ -881,14 +882,14 @@ var loadParks = function () {
     while (storeHighEl.firstChild) {
         storeHighEl.removeChild(storeHighEl.firstChild);
     };
-    storeHighEl.textContent = "High Priority Parks";
     while (storeMedEl.firstChild) {
         storeMedEl.removeChild(storeMedEl.firstChild);
     };
-    storeMedEl.textContent = "Medium Priority Parks";
     while (storeLowEl.firstChild) {
         storeLowEl.removeChild(storeLowEl.firstChild);
     };
+    storeHighEl.textContent = "High Priority Parks";
+    storeMedEl.textContent = "Medium Priority Parks";
     storeLowEl.textContent = "Low Priority Parks";
     for (var i = 0; i < localStorage.length; i++) {
         //////////////////////////////////////////////////////////////fix case with " national and state parks"/////////////////////////////////
@@ -1038,14 +1039,12 @@ var cardSubmitHandler = function(event) {
     // }
 }
 
-searchBtnEl.addEventListener("click", formSubmitHandler);
-loadParks();
-homeCardEl.addEventListener("click", cardSubmitHandler);
+// homeCardEl.addEventListener("click", cardSubmitHandler);
 
 
 // PULL HIGH PRIORITY CARDS FROM LOCAL STORAGE AND CREATE/FILL CARDS FOR HOMEPAGE
 function addStoredParkToCard(parkName) {
-
+    
     //remove end part of str to get name from "parks" array
     var park = parkName.replace(' National Park', '');
     //check array for name 
@@ -1054,83 +1053,83 @@ function addStoredParkToCard(parkName) {
     }
     //parkCode = code of chosen park
     var parkCode = parks.find(isPark).code;
-
     getNPInfo(parkCode);
-
+    
+    
     //get data for park
     function getNPInfo(code) {
-
+        
         var natParkUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + code + "&api_key=" + apiKeyNatPark;
         fetch(natParkUrl)
-            .then(function (response) {
-                // request was successful
-                if (response.ok) {
-                    response.json().then(function (data) {
-                        fillCards(data);
-                    });
-                } else {
-                    modalParkNotFound();
-                    //alert('Error: National Park Not Found');
-                }
-            })
-            .catch(function (error) {
-                modalUnableToConnect();
-                //alert("Unable to connect to National Park API");
-            });
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json().then(function (data) {
+                    fillCards(data);
+                });
+            } else {
+                modalParkNotFound();
+                //alert('Error: National Park Not Found');
+            }
+        })
+        .catch(function (error) {
+            modalUnableToConnect();
+            //alert("Unable to connect to National Park API");
+        });
     };
-
+    
     //create and fill card with park-data
     function fillCards(data) {
         if (localStorage.length > 0) {
             $("#defaultCard").addClass("hide");
-
+            
             // //get image data which has img-url, img-name and img-descr
             var images = data.data[0].images;
             //create card append it to container and fill up with info from local storage
             $('#cardParent').append(
                 $('<div/>')
-                    .attr("id", "cardNumb" + i)
-                    .addClass("col s5 m5 hoverable cardConteiner")
-
+                .attr("id", "cardNumb" + i)
+                .addClass("col s5 m5 hoverable cardConteiner")
+                
+                .append(
+                    $('<div/>')
+                    .addClass("card")
+                    
                     .append(
                         $('<div/>')
-                            .addClass("card")
-
-                            .append(
-                                $('<div/>')
-                                    .addClass("card-image")
-
-                                    .append(
-                                        $('<img/>')
-                                            .attr("id", "cardImg" + i)
-                                            .attr("src", images[i].url)
-                                            .addClass("aspect-ratio")
-                                    )
-                                    .append(
-                                        $('<span/>')
-                                            .attr("id", "cardName" + i)
-                                            .addClass("card-title")
-                                            .text(parkName)
-                                    )
+                        .addClass("card-image")
+                        
+                        .append(
+                            $('<img/>')
+                            .attr("id", "cardImg" + i)
+                            .attr("src", images[i].url)
+                            .addClass("aspect-ratio")
                             )
-                    )
-            );
-        }
-        else {
-            $("#defaultCard").removeClass("hide")
-        }
-
-        $('.card').append(
-            $('<div/>')
-                .addClass("card-content")
-                .append(
-                    $('<p/>')
-                        .attr("id", "cardDescr" + i)
-                        .text(images[i].caption)
-                )
-        )
-        i++;
-    }
-};
-
-
+                            .append(
+                                $('<span/>')
+                                .attr("id", "cardName" + i)
+                                .addClass("card-title")
+                                .text(parkName)
+                                )
+                                )
+                                )
+                                );
+                            }
+                            else {
+                                $("#defaultCard").removeClass("hide")
+                            }
+                            
+                            $('.card').append(
+                                $('<div/>')
+                                .addClass("card-content")
+                                .append(
+                                    $('<p/>')
+                                    .attr("id", "cardDescr" + i)
+                                    .text(images[i].caption)
+                                    )
+                                    )
+                                    i++;
+                                }
+                            };
+searchBtnEl.addEventListener("click", formSubmitHandler);
+loadParks();
