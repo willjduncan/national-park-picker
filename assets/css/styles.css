@@ -103,9 +103,6 @@ html {
   overflow: hidden;
   cursor: url(./assets/images/frozen-panther.png), auto;
 }
-.title-style {
-  font-weight: bold;
-}
 
 /* LISTS */
 .list-header {

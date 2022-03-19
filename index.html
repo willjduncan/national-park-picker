@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
-  <link rel="shortcut icon" type="image/x-icon" href="./assets/images/frozen-panther.png" />
   <title>National Park Picker</title>
 </head>
 
@@ -36,9 +35,8 @@
         <li>
           <img id="img0" src="https://wallpapercave.com/wp/wp4738979.jpg">
           <div class="caption center-align">
-            <h3 id="imgName0">The National Park Service protects over 84 million acres of wild landscapes and historic
-              sites.</h3>
-            <h5 id="descr0"></h5>
+            <h3 id="imgName0">The National Park Service protects over 84 million acres of wild landscapes and historic sites.</h3>
+            <h5 id="descr0" ></h5>
           </div>
         </li>
         <li>
@@ -75,9 +73,9 @@
     <div class="col s12 m3">
       <div class="row">
         <div class="input-field col s12">
-          <i class="material-icons prefix"></i>
+          <i class="material-icons prefix">chevron_right</i>
           <input name="park-name" id="park-name" type="text" autofocus="true" class="autocomplete"
-          placeholder="Yosemite" />
+            placeholder="Yosemite" />
           <button type="submit" class="btn-search third" id="search">Search</button>
           <label for="autocomplete-input">Enter name of the National Park</label>
         </div>
@@ -89,22 +87,10 @@
       </div>
     </div>
 
-    <!-- modal -->
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <h4 id="modal-header">Modal Header</h4>
-        <p id="modal-text"></p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
-      </div>
-    </div>
-    <!--  -->
-
     <!-- alerts -->
     <div class="col s9" id="alerts"></div>
-    <div class="col s9 choices hide">
-    <div class="" id="add-park"></div>
+    <div class="col s9" id="add-park"></div>
+    <div class="choices hide">
       <div>
         <input type="radio" class="radio-btn" id="high-p" name="priority" value="High Priority" checked>
         <label for="high-p">High Priority</label>
@@ -113,7 +99,7 @@
         <input type="radio" class="radio-btn" id="med-p" name="priority" value="Medium Priority">
         <label for="med-p">Medium Priority</label>
       </div>
-      
+
       <div>
         <input type="radio" class="radio-btn" id="low-p" name="priority" value="Low Priority">
         <label for="low-p">Low Priority</label>
@@ -124,72 +110,82 @@
     <!-- Results shows here -->
     <div class="col s9" id="results">
       <div id="cardParent" class="row">
-        
-        <div id="defaultCard" class="col s5 m5 hoverable cardConteiner">
+   <div id="defailtCard" class="col s5 m5 hoverable cardConteiner">
           <div class="card">
             <div class="card-image">
               <img id="cardImg0" class="aspect-ratio" src="./assets/images/content-cards-placeholder.jpeg">
-              <span id="cardName0" class="card-title title-style">Discover your favorite park!</span>
+              <span id="cardName0" class="card-title">Prioritize your next adventure!</span>
               <a></a>
             </div>
             <div class="card-content">
-              <p id="cardDescr0">Search for National Park and Add it to your "High Priority", so you can find it on homepage
-              </p>
+              <p id="cardDescr0">Search for National Park and add it to your favorites, and we'll feature it on the homepage!</p>
             </div>
           </div>
         </div>
 
+        <div class="col s6 m5 cardConteiner hoverable">
+          <div class="card">
+            <div class="card-image">
+              <img id="cardImg1" class="result" src="https://wallpapercave.com/wp/wp4738979.jpg">
+              <span id="cardName1" class="card-title">Plan your next step with us!</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+              <p id="cardDescr1">Discover activities and tours, as well as upcoming weather at each national park. Check the links below for further resources.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
     <div id="activities" class="col s9"></div>
     <div id="tours" class="col s9"></div>
-  </div>
+</div>  
   </div>
   <!--Weather Container-->
-  <div class="row border" id="five-day-forecast">
-    <h2 class="col-12" id="forecast"></h2>
-    <div class="d-flex" id="fiveday-container">
+  <div class = "row border" id = "five-day-forecast">
+    <h2 class= "col-12" id = "forecast"></h2>
+    <div class = "d-flex" id = "fiveday-container">
+  </div>
+  <div></div>
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12 footer-width">
+          <h5 class="white-text">National Park Picker</h5>
+          <p class="grey-text text-lighten-4">Get outdoor and explore</p>
+        </div>
+        <div id="resources" class="col l4 offset-l2 s12 footer-width">
+          <h5 class="white-text">Need more Information?</h5>
+          <h6 class="white-text">Check out these sites!</h6>
+          <ul>
+            <li class="grey-text text-lighten-3">Get more information at the <a id="nat-park-site"
+                class="grey-text text-lighten-3 underline" href="https://www.nps.gov/index.htm" target="_blank">
+                National Park Service</a></li>
+            <li class="grey-text text-lighten-3">Reserve campsites and tours at <a id="rec-site"
+                class="grey-text text-lighten-3 underline" href="https://www.recreation.gov/" target="_blank">
+                Recreation.gov</a></li>
+            <li class="grey-text text-lighten-3">Look at maps and print pamphlets from <a id="map-site"
+                class="grey-text text-lighten-3 underline" href="http://npmaps.com/" target="_blank"> NP Maps</a></li>
+            <li class="grey-text text-lighten-3">Discover more hikes and trails at <a
+                class="grey-text text-lighten-3 underline" href="https://www.hikingproject.com/nationalparks"
+                target="_blank"> Hiking Project</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div></div>
-    <footer class="page-footer">
+    <div class="footer-copyright">
       <div class="container">
-        <div class="row">
-          <div class="col l6 s12 footer-width">
-            <h5 class="white-text">National Park Picker</h5>
-            <p class="grey-text text-lighten-4">Get outdoor and explore</p>
-          </div>
-          <div id="resources" class="col l4 offset-l2 s12 footer-width">
-            <h5 class="white-text">Need more Information?</h5>
-            <h6 class="white-text">Check out these sites!</h6>
-            <ul>
-              <li class="grey-text text-lighten-3">Get more information at the <a id="nat-park-site"
-                  class="grey-text text-lighten-3 underline" href="https://www.nps.gov/index.htm" target="_blank">
-                  National Park Service</a></li>
-              <li class="grey-text text-lighten-3">Reserve campsites and tours at <a id="rec-site"
-                  class="grey-text text-lighten-3 underline" href="https://www.recreation.gov/" target="_blank">
-                  Recreation.gov</a></li>
-              <li class="grey-text text-lighten-3">Look at maps and print pamphlets from <a id="map-site"
-                  class="grey-text text-lighten-3 underline" href="http://npmaps.com/" target="_blank"> NP Maps</a></li>
-              <li class="grey-text text-lighten-3">Discover more hikes and trails at <a
-                  class="grey-text text-lighten-3 underline" href="https://www.hikingproject.com/nationalparks"
-                  target="_blank"> Hiking Project</a></li>
-            </ul>
-          </div>
-        </div>
+        © 2022 Copyright Text
       </div>
-      <div class="footer-copyright">
-        <div class="container">
-          © 2022 Frozen Panthers
-        </div>
-      </div>
-    </footer>
+    </div>
+  </footer>
 
-    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-    <script src="./assets/js/homepage.js"></script>
+  <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  <script src="./assets/js/homepage.js"></script>
 
 
 </body>
