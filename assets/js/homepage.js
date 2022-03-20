@@ -692,21 +692,6 @@ function addParkPrompt (submission) {
     $(".choices").removeClass("hide");
 }
 
-// PULL HIGH PRIORITY CARDS FROM LOCAL STORAGE
-function addStoredParkToCard(parkToSave) {
-    //remove end part of str to get name from "parks" array
-    var park = parkToSave.replace(' National Park', '');
-    //check array for name 
-    function isPark(NP) {
-        return NP.name === park;
-    }
-    //parkCode = code of chosen park
-    var parkCode = parks.find(isPark).code;
-
-    //////////////////////////////////////
-    getNPInfo(parkCode);
-    //maybe getNatParkInfo(parkCode); ?? and delete next function
-};
 
 //Slideshow of NP photos
 $(document).ready(function () {
@@ -716,30 +701,6 @@ $(document).ready(function () {
         interval: 8000
     });
 });
-
-// MODALS
-function modalParkNotFound() {
-    $("#modal-header").text("Error: National Park Not Found");
-    modal();
-}
-
-function modalUnableToConnect() {
-    $("#modal-header").text("Unable to connect to National Park API");
-    modal();
-}
-
-function modalEnterValidPark() {
-    $("#modal-header").text("Please enter a National Park.");
-    modal();
-}
-
-function modal() {
-    $(document).ready(function () {
-        $('#modal').modal();
-        $('#modal').modal('open');
-    });
-}
-// END MODALS
 
 //pull park data for card
 function getNPInfo(code) {
@@ -778,6 +739,7 @@ if (localStorage.length > 0) {
         .append(
         $('<div/>')
         .addClass("card")
+        
             
             .append(
             $('<div/>')
@@ -797,22 +759,22 @@ if (localStorage.length > 0) {
                 .text(nameOfPark)
                 )
             )
+
+            .append(
+                $('<div/>')
+                .addClass("card-content")
+                .append(
+                    $('<p/>')
+                    .attr("id", "cardDescr" + i)
+                    .text(images[i].caption)
+            )
+            )
         )
         );
     }
     else {
         $("#defaultCard").removeClass("hide")
     };
-
-    $('.card').append(
-        $('<div/>')
-        .addClass("card-content")
-        .append(
-            $('<p/>')
-            .attr("id", "cardDescr" + i)
-            .text(images[i].caption)
-        )
-    )
     i++;
 };
                                 
