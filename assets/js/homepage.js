@@ -726,6 +726,7 @@ function getNPInfo(code) {
 function fillCards(data) {
 if (localStorage.length > 0) {
     $("#defaultCard").addClass("hide");
+    $("#defaultCard2").addClass("hide");
     
     // //get image data which has img-url, img-name and img-descr
     var images = data.data[0].images;
@@ -734,7 +735,7 @@ if (localStorage.length > 0) {
     $('#cardParent').append(
         $('<div/>')
         .attr("id", "cardNumb" + i)
-        .addClass("col s5 m5 hoverable cardConteiner")
+        .addClass("col s5 m5 hoverable cardContainer")
         
         .append(
         $('<div/>')

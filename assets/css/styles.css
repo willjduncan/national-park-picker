@@ -94,7 +94,7 @@ html {
 .card-body{
   flex:auto;
 }
-.cardConteiner {
+.cardContainer {
   display: flex;
   align-items: stretch !important;
   justify-content: space-evenly;
