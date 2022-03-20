@@ -59,6 +59,8 @@ We began the project by picking our API's, CSS library, and creating a wireframe
 
 From there, we added features to improve the website: autofill for the search bar, a photo slideshow at the top, and dynamic links to further resources. Next, we added the ability to save national parks according to priority, and then display the high priority parks to the homescreen. 
 
+Josh - Created weather API that displays on the bottom of the results page. It displays the 5-day forcast along with the temperature and humdity. The API is pulling info the searched park's city name and and displaying on the screen. I also added styling to the page using CSS and Materialized. Styling of the page is taking place in the CSS and JavaScript files. 
+
 <!-- ADD ADDITIONAL DEVELOPMENTS TO THE DESCRIPTION PLUS ANY MAJOR ISSUES OVERCOME -->
 
 
@@ -71,24 +73,23 @@ Our repository on GitHub is named national-park-picker. The link to this reposit
 
 The link to the live website is below: 
 
-<!-- []()  ADD LIVE LINK HERE -->
+[https://joshuad1590.github.io/national-park-picker/](https://joshuad1590.github.io/national-park-picker/)
 
 ## Usage
 
-<!-- MUST ADD THE SCREENSHOTS AND NAME THEM ACCORDINGLY -->
 Screenshots are shown of the HTML, CSS, and JavaScript pages, all built from scratch.
 
-![screenshot of HTML](/assets/images/screenshot-html.png)
-![screenshot of CSS](/assets/images/screenshot-css.png)
-![screenshot of JavaScript](/assets/images/screenshot-js.png)
+![screenshot of HTML](./assets/images/screenshot-html.png)
+![screenshot of CSS](./assets/images/screenshot-css.png)
+![screenshot of JavaScript](./assets/images/screenshot-js.png)
 
 Screenshots are also provided of the completed website at its load screen, and also mid-search. 
 
-![screenshot of the homepage](/assets/images/screenshot-homepage.png)
+![screenshot of the homepage](./assets/images/screenshot-homepage.png)
 
 The search bar autofills to help prevent user error. Note the saved national parks displayed on the left. At the top, a delightful slideshow gives fun facts. Below, cards show the high-priority parks. 
 
-![screenshot of the website mid-search](/assets/images/screenshot-active.png) 
+![screenshot of the website mid-search](./assets/images/screenshot-active.png) 
 
 When searched, the photos change to reflect the national park. A description is given, followed by the address and directions to get there. Beyond that are the top 50 activities to engage in and any tours available, all with durations listed (if available). The weather for the next 5 days is shown for the park. At the footer, the links of the top three websites change to search according to the named national park.
 
@@ -105,8 +106,7 @@ Advertisement could come from a slew of outdoor companies such as REI or provide
 
 ## Credits
 We used the NPS API for the majority of our information, including photos and coordinates. We used AccuWeather's API for the 5-day forecast. Materialize was used as our CSS library and JQuery was used for convenience sake. The WHEN/THEN section of this README was based off the project assignment Acceptance Criteria. All previous challenges, module creations, and in-class assignments up to this point were used to refresh our memory on material we've previously applied. Stack Overflow, MDN Web Docs, W3, and Google were critical to our success. 
-<!-- ADD FURTHER CREDITS HERE -->
-Josh - Created weather API that displays on the bottom of the results page. It displays the 5-day forcast along with the temperature and humdity. The API is pulling info the searched park's city name and and displaying on the screen. I also added styling to the page using CSS and Materialized. Styling of the page is taking place in the CSS and JavaScript files. 
+
 Special Thank to:
 Luiz (TA)
 Luke (TA)

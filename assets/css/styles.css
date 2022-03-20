@@ -1,12 +1,20 @@
 /* BODY */
 html {
     scroll-behavior: smooth;
-    background-color: beige;
+    background-color: gainsboro;
 }
 
 /* NAV BAR */
 .nav-transparent{
   background-color: rgba(0, 145, 234, 0.2) !important ;
+}
+nav .brand-logo {
+  position:absolute;
+  color: #fff;
+  display: inline-block;
+  font-size: 2.1rem;
+  padding:0;
+  margin-left: 5rem;
 }
 
 /* SLIDESHOW */
@@ -87,6 +95,15 @@ html {
   opacity: 1;
   pointer-events: auto;
 }
+/* CHOICES */
+.choices {
+  border: solid 1px black;
+  border-radius: 12px;
+  text-align: center;
+}
+.choices label {
+  color: black;
+}
 
 /* CARDS */
 .aspect-ratio {
@@ -102,19 +119,17 @@ html {
   margin-right: 3%;
   max-height: 350px;
   overflow: hidden;
-  cursor: url(./assets/images/frozen-panther.png), auto;
+  cursor: url(../images/frozen-panther.png), auto;
 }
 
 /* LISTS */
 .list-header {
   font-size: 1.25em;
   font-weight: bold;
-  /* text-decoration: underline; */
 }
 .list-item {
   font-size: .75em;
   font-weight: normal;
-  /* text-decoration: none; */
 }
 .list-group-item{
   line-height: 0.5;
@@ -138,14 +153,6 @@ html {
 .underline {
     text-decoration: underline;
 }
-
-.cardConteiner {
-  cursor: url(../images/frozen-panther.png), auto;
-}
-
-/* .card-content {
-  overflow: hidden;
-} */
 h3 {
   font-size: 2.92rem;
     line-height: 110%;
@@ -176,11 +183,25 @@ h5 {
     align-items: stretch;
   text-decoration: underline;
 }
-nav .brand-logo {
-  position:absolute;
-  color: #fff;
-  display: inline-block;
-  font-size: 2.1rem;
-  padding:0;
-  margin-left: 5rem;
+
+@media screen and (max-width: 575px) {
+  .slider {
+    width: 100%;
+  }
+  nav .brand-logo {
+    font-size: 1.5rem;
+  }
+  .material-icons {
+    visibility: hidden;
+  }
+  #park-name {
+    margin-left: 0;
+  }
+  #activities-header img {
+    width: 100% !important;
+    height: 200px !important;
+  }
+  .caption h3{
+    font-size: 2rem;
+  }
 }
