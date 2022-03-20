@@ -71,24 +71,23 @@ Our repository on GitHub is named national-park-picker. The link to this reposit
 
 The link to the live website is below: 
 
-<!-- []()  ADD LIVE LINK HERE -->
+[https://joshuad1590.github.io/national-park-picker/](https://joshuad1590.github.io/national-park-picker/)
 
 ## Usage
 
-<!-- MUST ADD THE SCREENSHOTS AND NAME THEM ACCORDINGLY -->
 Screenshots are shown of the HTML, CSS, and JavaScript pages, all built from scratch.
 
-![screenshot of HTML](/assets/images/screenshot-html.png)
-![screenshot of CSS](/assets/images/screenshot-css.png)
-![screenshot of JavaScript](/assets/images/screenshot-js.png)
+![screenshot of HTML](./assets/images/screenshot-html.png)
+![screenshot of CSS](./assets/images/screenshot-css.png)
+![screenshot of JavaScript](./assets/images/screenshot-js.png)
 
 Screenshots are also provided of the completed website at its load screen, and also mid-search. 
 
-![screenshot of the homepage](/assets/images/screenshot-homepage.png)
+![screenshot of the homepage](./assets/images/screenshot-homepage.png)
 
 The search bar autofills to help prevent user error. Note the saved national parks displayed on the left. At the top, a delightful slideshow gives fun facts. Below, cards show the high-priority parks. 
 
-![screenshot of the website mid-search](/assets/images/screenshot-active.png) 
+![screenshot of the website mid-search](./assets/images/screenshot-active.png) 
 
 When searched, the photos change to reflect the national park. A description is given, followed by the address and directions to get there. Beyond that are the top 50 activities to engage in and any tours available, all with durations listed (if available). The weather for the next 5 days is shown for the park. At the footer, the links of the top three websites change to search according to the named national park.
 

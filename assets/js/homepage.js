@@ -169,6 +169,7 @@ var parks = [
         "code": "kefj"
     },
     {
+        //the same as sequoia
         "name": "Kings Canyon",
         "code": "seki"
     },
@@ -291,7 +292,6 @@ $(document).ready(function () {
             "Biscayne": null,
             "Black Canyon of the Gunnison": null,
             "Bryce Canyon": null,
-            // "Cabrillo": null,
             "Canyonlands": null,
             "Capitol Reef": null,
             "Carlsbad Caverns": null,
@@ -305,7 +305,6 @@ $(document).ready(function () {
             "Everglades": null,
             "Gates of the Arctic": null,
             "Gateway Arch": null,
-            // "Gettysburg National Military Park": null,
             "Glacier": null,
             "Glacier Bay": null,
             "Grand Canyon": null,
@@ -316,7 +315,6 @@ $(document).ready(function () {
             "Guadalupe Mountains": null,
             "Haleakala": null,
             "Hawai’i Volcanoes": null,
-            // "Harpers Ferry": null,
             "Hot Springs": null,
             "Isle Royale": null,
             "Joshua Tree": null,
@@ -330,7 +328,6 @@ $(document).ready(function () {
             "Mesa Verde": null,
             "Mount Rainier": null,
             "North Cascades": null,
-            // "Organ Pipe Cactus": null,
             "Olympic": null,
             "Petrified Forest": null,
             "Pinnacles": null,
@@ -340,7 +337,6 @@ $(document).ready(function () {
             "Sequoia": null,
             "Shenandoah": null,
             "Theodore Roosevelt": null,
-            // "Valley Forge": null,
             "Virgin Islands": null,
             "Voyageurs": null,
             "Wind Cave": null,
@@ -348,6 +344,11 @@ $(document).ready(function () {
             "Yellowstone": null,
             "Yosemite": null,
             "Zion": null,
+            // "Cabrillo": null,
+            // "Organ Pipe Cactus": null,
+            // "Gettysburg National Military Park": null,
+            // "Valley Forge": null,
+            // "Harpers Ferry": null,
         },
     });
 });
@@ -375,6 +376,7 @@ var clearItems = function () {
 
 // LOAD PARKS
 function loadParks () {
+    //Clear anything previously there and begin again.
     while (storeHighEl.firstChild) {
         storeHighEl.removeChild(storeHighEl.firstChild);
     };
@@ -387,15 +389,12 @@ function loadParks () {
         storeLowEl.removeChild(storeLowEl.firstChild);
     };
     storeLowEl.textContent = "Low Priority Parks";
+    //Add saved parks to the left-side list according to priority
     for (var i = 0; i < localStorage.length; i++) {
-        //////////////////////////////////////////////////////////////fix case with " national and state parks"/////////////////////////////////
-            // console.log(localStorage.key(i));
             var storedPark = localStorage.key(i);
             var storedParkEl = document.createElement("li");
-
             storedParkEl.textContent = storedPark;
             var storedPriority = JSON.parse(localStorage.getItem(storedPark));
-            // console.log(storedPriority);
             if (storedPriority === "High Priority") {
                 $(".store-high").removeClass("hide");
                 storeHighEl.append(storedParkEl);
@@ -449,7 +448,6 @@ function alerts(natParkUrl) {
                 response.json().then(function (data) {
                     if (natParkUrl.toLowerCase().indexOf("parks") >= 0) {
                         displayNatParkInfo(data);
-                        //fillCards(data);
                     }
                     else if (natParkUrl.toLowerCase().indexOf("alerts") >= 0) {
                         displayNatParkAlerts(data);
@@ -457,7 +455,6 @@ function alerts(natParkUrl) {
                     else if (natParkUrl.toLowerCase().indexOf("thingstodo") >= 0) {
                         displayNatParkToDos(data);
                     }
-                    //867 delete?
                     else if (natParkUrl.toLowerCase().indexOf("tours") >= 0) {
                         displayNatParkTours(data);
                     }
@@ -469,7 +466,7 @@ function alerts(natParkUrl) {
         .catch(function (error) {
             modalUnableToConnect();
         });
-    }
+}
     
 // DISPLAY SEARCHED PARK INFO
 function displayNatParkInfo(data) {
@@ -542,7 +539,6 @@ function displayNatParkInfo(data) {
     $("#nat-park-site").attr("href", newUrl);
     parkName = $("#results").find("h2").text();
     $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
-    //////////////////////////////////////////////////////////  FIX AN ISSUE FOR [national and state parkS]  //////////////////////////////////////////////
     var parkSearchArr = parkName.split(" National Park");
     var parkSearchCode = parkSearchArr[0];
     parkSearchCode = parkSearchCode.toLowerCase();
@@ -561,7 +557,6 @@ function getNatParkAlerts (code) {
     natParkUrl = "https://developer.nps.gov/api/v1/alerts?parkCode=" + code + "&api_key=" + apiKeyNatPark;
     alerts(natParkUrl);
 };
-// local storage lines 387 737 849
 
 function displayNatParkAlerts(data) {
     var alertArr = data.data;
@@ -569,7 +564,6 @@ function displayNatParkAlerts(data) {
         var alertTitle = alertArr[i].title;
         var alertTitleEl = document.createElement("p");
         alertTitleEl.innerHTML = '<a class="btn-floating pulse"><i class="material-icons alert">priority_high</i></a> ALERT: ' + alertTitle;
-        //alertTitleEl.textContent = "ALERT: " + alertTitle;
         alertTitleEl.setAttribute("style", "color: red");
         alertsEl.append(alertTitleEl);
     }
@@ -693,7 +687,7 @@ function addParkPrompt (submission) {
 }
 
 
-//Slideshow of NP photos
+//SLIDESHOW OF NAT PARK PHOTOS
 $(document).ready(function () {
     $('.slider').slider({
         full_width: true,
@@ -740,8 +734,7 @@ if (localStorage.length > 0) {
         .append(
         $('<div/>')
         .addClass("card")
-        
-            
+
             .append(
             $('<div/>')
             .addClass("card-image")
@@ -768,7 +761,7 @@ if (localStorage.length > 0) {
                     $('<p/>')
                     .attr("id", "cardDescr" + i)
                     .text(images[i].caption)
-            )
+                )
             )
         )
         );
@@ -778,8 +771,7 @@ if (localStorage.length > 0) {
     };
     i++;
 };
-                                
-                                
+                                                               
 // "FIND PARK" BUTTON
 $("#check").click(function (data) {
     //parkName = $("#results").find("h2").text();
@@ -794,11 +786,11 @@ $("#check").click(function (data) {
     
 });        
 
-//Weather API
+//BEGIN FETCH AND DISPLAY OF WEATHER API
 var get5Day = function (city) {
     var apiKey = "4ab2d4e1d400c9fddaeddcbd67c21dac"
     var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`
-
+    //fetch from weather and go to display function
     fetch(apiURL)
         .then(function (response) {
             response.json().then(function (data) {
@@ -807,15 +799,15 @@ var get5Day = function (city) {
             });
         });
 };
-
+//display function
 var display5Day = function (weather) {
     forecastContainerEl.textContent = ""
+    //add title
     forecastTitle.textContent = "5-Day Forecast:";
     console.log(weather);
     var forecast = weather.list;
     for (var i = 5; i < forecast.length; i = i + 8) {
         var dailyForecast = forecast[i];
-        console.log("working");
 
         var forecastEl = document.createElement("div");
         forecastEl.classList = "col s6 offset-s3 m2 valign card-panel teal";
@@ -847,23 +839,21 @@ var display5Day = function (weather) {
         forecastContainerEl.appendChild(forecastEl);
     }
 }
+// END FETCH AND DISPLAY OF WEATHER API
 
 // MODALS
 function modalParkNotFound() {
     $("#modal-header").text("Error: National Park Not Found");
     modal();
 }
-
 function modalUnableToConnect() {
     $("#modal-header").text("Unable to connect to National Park API");
     modal();
 }
-
 function modalEnterValidPark() {
     $("#modal-header").text("Please enter a National Park.");
     modal();
 }
-
 function modal() {
     $(document).ready(function () {
         $('#modal').modal();
