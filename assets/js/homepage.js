@@ -729,7 +729,7 @@ if (localStorage.length > 0) {
     $('#cardParent').append(
         $('<div/>')
         .attr("id", "cardNumb" + i)
-        .addClass("col s5 m5 hoverable cardContainer")
+        .addClass("col s9 m5 hoverable cardContainer")
         
         .append(
         $('<div/>')

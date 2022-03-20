@@ -175,8 +175,7 @@ h5 {
   text-decoration: underline;
 }
 
-/* MEDIA QUERIES */
-@media screen  and (max-width: 575px) {
+@media screen and (max-width: 575px) {
   .slider {
     width: 100%;
   }
@@ -192,5 +191,8 @@ h5 {
   #activities-header img {
     width: 100% !important;
     height: 200px !important;
+  }
+  .caption h3{
+    font-size: 2rem;
   }
 }
