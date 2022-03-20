@@ -106,7 +106,12 @@ Advertisement could come from a slew of outdoor companies such as REI or provide
 ## Credits
 We used the NPS API for the majority of our information, including photos and coordinates. We used AccuWeather's API for the 5-day forecast. Materialize was used as our CSS library and JQuery was used for convenience sake. The WHEN/THEN section of this README was based off the project assignment Acceptance Criteria. All previous challenges, module creations, and in-class assignments up to this point were used to refresh our memory on material we've previously applied. Stack Overflow, MDN Web Docs, W3, and Google were critical to our success. 
 <!-- ADD FURTHER CREDITS HERE -->
-
+Josh - Created weather API that displays on the bottom of the results page. It displays the 5-day forcast along with the temperature and humdity. The API is pulling info the searched park's city name and and displaying on the screen. I also added styling to the page using CSS and Materialized. Styling of the page is taking place in the CSS and JavaScript files. 
+Special Thank to:
+Luiz (TA)
+Luke (TA)
+Jaired Jawed(Josh's Tutor)
+Sandra (TA)
 ## License
 
 MIT License

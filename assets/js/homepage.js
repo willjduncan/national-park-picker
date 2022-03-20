@@ -818,7 +818,7 @@ var display5Day = function (weather) {
         console.log("working");
 
         var forecastEl = document.createElement("div");
-        forecastEl.classList = "card bg-primary text-light m-2";
+        forecastEl.classList = "col s6 offset-s3 m2 valign card-panel teal";
 
         var forecastDate = document.createElement("h5")
         forecastDate.textContent = moment.unix(dailyForecast.dt).format("MMM D, YYYY");
