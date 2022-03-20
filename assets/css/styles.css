@@ -95,6 +95,15 @@ nav .brand-logo {
   opacity: 1;
   pointer-events: auto;
 }
+/* CHOICES */
+.choices {
+  border: solid 1px black;
+  border-radius: 12px;
+  text-align: center;
+}
+.choices label {
+  color: black;
+}
 
 /* CARDS */
 .aspect-ratio {
