@@ -94,7 +94,7 @@ html {
 .card-body{
   flex:auto;
 }
-.cardConteiner {
+.cardContainer {
   display: flex;
   align-items: stretch !important;
   justify-content: space-evenly;
@@ -102,9 +102,6 @@ html {
   max-height: 350px;
   overflow: hidden;
   cursor: url(./assets/images/frozen-panther.png), auto;
-}
-.title-style {
-  font-weight: bold;
 }
 
 /* LISTS */
