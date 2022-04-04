@@ -66,14 +66,14 @@ Josh - Created weather API that displays on the bottom of the results page. It d
 
 ## Installation
 
-Our repository on GitHub is named national-park-picker. The link to this repository is below.
+Our 'repository on GitHub is named national-park-picker. The link to this repository is below.
 
 [https://github.com/joshuad1590/national-park-picker.git](https://github.com/joshuad1590/national-park-picker.git)
 
 
 The link to the live website is below: 
 
-[https://joshuad1590.github.io/national-park-picker/](https://joshuad1590.github.io/national-park-picker/)
+[https://joshuad1590.github.io/national-park-picker/](https://joshuad1590.github.io/national-park-picker/)'
 
 ## Usage
 
