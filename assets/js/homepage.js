@@ -1,4 +1,5 @@
 const apiKeyNatPark = "XeD3ty79NiWNMwuU7DVhQM9fye0L5RspxNkmYSXe";
+const apiKeyWeather = "VDnb8aw7KhRDLBsowfaPixWuDjegRJ83";
 var resultsEl = document.querySelector("#results");
 var searchBtnEl = document.querySelector("#search");
 var nameInputEl = document.querySelector("#park-name");
@@ -9,7 +10,6 @@ var addParkEl = document.querySelector("#add-park");
 var storeHighEl = document.querySelector(".store-high");
 var storeMedEl = document.querySelector(".store-med");
 var storeLowEl = document.querySelector(".store-low");
-var apiKeyWeather = "VDnb8aw7KhRDLBsowfaPixWuDjegRJ83";
 var forecastContainerEl = document.querySelector("#fiveday-container");
 var forecastTitle = document.querySelector("#forecast");
 var homeCardEl = document.querySelector("#cardParent");
@@ -426,7 +426,6 @@ var formSubmitHandler = function (event) {
         getNatParkToDos(park.code);
         getNatParkTours(park.code);
         addParkPrompt(submission);
-        get5Day(park.name);
         nameInputEl.value = "";
     } else {
         modalEnterValidPark();
@@ -473,6 +472,8 @@ function displayNatParkInfo(data) {
     console.log("BASIC INFO: ");
     console.log(data);
     $("#desc-link").removeClass("hide");
+    //Fetch Weather
+    get5Day(data.data[0].latitude, data.data[0].longitude);
     //Display National Park name as a title
     var name = data.data[0].fullName;
     var titleEl = document.createElement("h2");
@@ -786,10 +787,14 @@ $("#check").click(function (data) {
     
 });        
 
+
+
 //BEGIN FETCH AND DISPLAY OF WEATHER API
-var get5Day = function (city) {
+var get5Day = function (lat, lon) {
     var apiKey = "4ab2d4e1d400c9fddaeddcbd67c21dac"
-    var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`
+    var apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" 
+    + lon + "&exclude=hourly,minutely&units=imperial&appid=" + apiKey;
+    // var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`
     //fetch from weather and go to display function
     fetch(apiURL)
         .then(function (response) {
@@ -801,38 +806,44 @@ var get5Day = function (city) {
 };
 //display function
 var display5Day = function (weather) {
+    console.log(weather.daily[0]);
     forecastContainerEl.textContent = ""
     //add title
     forecastTitle.textContent = "5-Day Forecast:";
-    console.log(weather);
-    var forecast = weather.list;
-    for (var i = 5; i < forecast.length; i = i + 8) {
-        var dailyForecast = forecast[i];
+    // console.log(weather);
+    var forecast = weather.daily;
+    for (var i = 1; i < 6; i++) {
+        var dailyForecast = forecast[i].weather;
 
         var forecastEl = document.createElement("div");
         forecastEl.classList = "col s6 offset-s3 m2 valign card-panel teal";
 
         var forecastDate = document.createElement("h5")
-        forecastDate.textContent = moment.unix(dailyForecast.dt).format("MMM D, YYYY");
+
+        var xDaysForward = moment().add(i, 'days');
+        // document.write(xDaysForward.format('dddd MMMM DD'));  
+
+
+        forecastDate.textContent = xDaysForward.format('dddd MMMM DD');
         forecastDate.classList = "card-header text-center"
         forecastEl.appendChild(forecastDate);
 
         var weatherIcon = document.createElement("img")
         weatherIcon.classList = "card-body text-center";
-        weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png`);
+        weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${dailyForecast[0].icon}@2x.png`);
 
         //append weather
         forecastEl.appendChild(weatherIcon);
 
         //make element for temp
-        var forecastTempEl = document.createElement("span");
+        var forecastTempEl = document.createElement("p");
         forecastTempEl.classList = "card-body text-center";
-        forecastTempEl.textContent = dailyForecast.main.temp + " °F";
+        forecastTempEl.textContent = "Temp: " + forecast[i].temp.day + "°F     ";
         forecastEl.appendChild(forecastTempEl);
 
-        var forecastHumEl = document.createElement("span");
+        var forecastHumEl = document.createElement("p");
         forecastHumEl.classList = "card-body text-center";
-        forecastHumEl.textContent = dailyForecast.main.humidity + "  %";
+        forecastHumEl.textContent = "Humidity: " + forecast[i].humidity + "% ";
         forecastEl.appendChild(forecastHumEl);
 
         //append forcast to div
