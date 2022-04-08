@@ -393,7 +393,7 @@ function loadParks () {
     for (var i = 0; i < localStorage.length; i++) {
             var storedPark = localStorage.key(i);
             var storedParkEl = document.createElement("li");
-            storedParkEl.textContent = storedPark;
+            storedParkEl.textContent = storedPark + " National Park";
             var storedPriority = JSON.parse(localStorage.getItem(storedPark));
             if (storedPriority === "High Priority") {
                 $(".store-high").removeClass("hide");

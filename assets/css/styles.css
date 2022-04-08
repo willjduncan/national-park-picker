@@ -122,6 +122,12 @@ nav .brand-logo {
   cursor: url(../images/frozen-panther.png), auto;
 }
 
+/* MAP STYLING */
+.no-bb {
+  border-bottom: none;
+}
+
+
 /* LISTS */
 .list-header {
   font-size: 1.25em;
@@ -184,6 +190,8 @@ h5 {
   text-decoration: underline;
 }
 
+
+/* MEDIA QUERIES */
 @media only screen and (min-width: 601px) {
   .row .col.m2 {
     width: 18.666667%;
