@@ -371,6 +371,7 @@ var clearItems = function () {
     while (addParkEl.firstChild) {
         addParkEl.removeChild(addParkEl.firstChild);
     };
+    $("#main-map").addClass("hide");
 };
 // END CLEAR PAGE
 
@@ -542,9 +543,10 @@ function displayNatParkInfo(data) {
     $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
     var parkSearchArr = parkName.split(" National Park");
     var parkSearchCode = parkSearchArr[0];
-    parkSearchCode = parkSearchCode.toLowerCase();
+    parkSearchCode = parkSearchCode.replaceAll("National and State Parks", "");
     parkSearchCode = parkSearchCode.replaceAll(" ", "-");
     parkSearchCode = parkSearchCode.replaceAll("ʻ", "");
+    parkSearchCode = parkSearchCode.toLowerCase();
     // parkSearchCode = parkSearchCode.join("");
 
     $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")

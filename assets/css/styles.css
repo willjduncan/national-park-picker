@@ -1,7 +1,8 @@
 /* BODY */
 html {
     scroll-behavior: smooth;
-    background-color: gainsboro;
+    /* background-color: gainsboro; */
+    background-color: #95A472;
 }
 
 /* NAV BAR */
@@ -155,6 +156,9 @@ nav .brand-logo {
 /* UTILITY CLASSES */
 .show {
   visibility: visible;
+}
+.hide {
+  visibility: hidden;
 }
 .underline {
     text-decoration: underline;
