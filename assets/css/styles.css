@@ -1,8 +1,18 @@
+:root {
+  --primary: #C4D6B0;
+  --secondary: #0091EA; 
+  /* --tertiary: #0F1108; */
+  --tertiary: #241909;
+  --light: #ffffff;
+  --dark: #272f32;
+}
 /* BODY */
 html {
     scroll-behavior: smooth;
     /* background-color: gainsboro; */
-    background-color: #95A472;
+    /* background-color: #95A472; */
+    background-color: var(--primary);
+    color: var(--tertiary)
 }
 
 /* NAV BAR */
@@ -62,9 +72,11 @@ nav .brand-logo {
   -moz-appearance: none;
   appearance: none;
   background-color: transparent;
-  border: 2px solid #e74c3c;
+  /* border: 2px solid #e74c3c; */
+  border: 2px solid var(--tertiary);
   border-radius: 0.6em;
-  color: #e74c3c;
+  /* color: #e74c3c; */
+  color: var(--tertiary);
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -126,6 +138,9 @@ nav .brand-logo {
 /* MAP STYLING */
 .no-bb {
   border-bottom: none;
+}
+#map { 
+  height: 250px; 
 }
 
 
