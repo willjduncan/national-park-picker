@@ -373,6 +373,7 @@ var clearItems = function () {
         addParkEl.removeChild(addParkEl.firstChild);
     };
     $("#main-map").addClass("hide");
+    $("#main-map-link").addClass("hide");
 };
 // END CLEAR PAGE
 
@@ -480,12 +481,18 @@ getNPMap = (long,lat) => {
     });
 }
 
+function displayNewNav() {
+    $("#desc-link").removeClass("hide");
+    $("#weather-link").removeClass("hide");
+    $("#map-link").removeClass("hide");
+}
+
     
 // DISPLAY SEARCHED PARK INFO
 function displayNatParkInfo(data) {
     console.log("BASIC INFO: ");
     console.log(data);
-    $("#desc-link").removeClass("hide");
+    displayNewNav();
     //Fetch NP's Weather
     get5Day(data.data[0].latitude, data.data[0].longitude);
     //Fetch NP's Map
