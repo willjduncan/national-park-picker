@@ -1,5 +1,6 @@
 const apiKeyNatPark = "XeD3ty79NiWNMwuU7DVhQM9fye0L5RspxNkmYSXe";
 const apiKeyWeather = "VDnb8aw7KhRDLBsowfaPixWuDjegRJ83";
+mapboxgl.accessToken = "pk.eyJ1Ijoid2lsbGpkdW5jYW4iLCJhIjoiY2wxcnZ0bDAxMGxxZTNvcXEzdTdxZzU3ZiJ9.2K211Cg3BG3AL1k-knpdAA"
 var resultsEl = document.querySelector("#results");
 var searchBtnEl = document.querySelector("#search");
 var nameInputEl = document.querySelector("#park-name");
@@ -371,6 +372,8 @@ var clearItems = function () {
     while (addParkEl.firstChild) {
         addParkEl.removeChild(addParkEl.firstChild);
     };
+    $("#main-map").addClass("hide");
+    $("#main-map-link").addClass("hide");
 };
 // END CLEAR PAGE
 
@@ -393,7 +396,7 @@ function loadParks () {
     for (var i = 0; i < localStorage.length; i++) {
             var storedPark = localStorage.key(i);
             var storedParkEl = document.createElement("li");
-            storedParkEl.textContent = storedPark;
+            storedParkEl.textContent = storedPark + " National Park";
             var storedPriority = JSON.parse(localStorage.getItem(storedPark));
             if (storedPriority === "High Priority") {
                 $(".store-high").removeClass("hide");
@@ -426,6 +429,7 @@ var formSubmitHandler = function (event) {
         getNatParkToDos(park.code);
         getNatParkTours(park.code);
         addParkPrompt(submission);
+        // addNatMap(park.name)
         nameInputEl.value = "";
     } else {
         modalEnterValidPark();
@@ -466,14 +470,33 @@ function alerts(natParkUrl) {
             modalUnableToConnect();
         });
 }
+
+//DISPLAY NAT PARK'S INDIVIDUAL MAP
+getNPMap = (long,lat) => {
+    var map = new mapboxgl.Map({
+     container: 'map',
+     center: [long, lat],
+     zoom:8,
+     style: 'mapbox://styles/mapbox/streets-v11'
+    });
+}
+
+function displayNewNav() {
+    $("#desc-link").removeClass("hide");
+    $("#weather-link").removeClass("hide");
+    $("#map-link").removeClass("hide");
+}
+
     
 // DISPLAY SEARCHED PARK INFO
 function displayNatParkInfo(data) {
     console.log("BASIC INFO: ");
     console.log(data);
-    $("#desc-link").removeClass("hide");
-    //Fetch Weather
+    displayNewNav();
+    //Fetch NP's Weather
     get5Day(data.data[0].latitude, data.data[0].longitude);
+    //Fetch NP's Map
+    getNPMap(data.data[0].longitude, data.data[0].latitude);
     //Display National Park name as a title
     var name = data.data[0].fullName;
     var titleEl = document.createElement("h2");
@@ -542,9 +565,10 @@ function displayNatParkInfo(data) {
     $("#rec-site").attr("href", "https://www.recreation.gov/search?q=" + parkName);
     var parkSearchArr = parkName.split(" National Park");
     var parkSearchCode = parkSearchArr[0];
-    parkSearchCode = parkSearchCode.toLowerCase();
+    parkSearchCode = parkSearchCode.replaceAll("National and State Parks", "");
     parkSearchCode = parkSearchCode.replaceAll(" ", "-");
     parkSearchCode = parkSearchCode.replaceAll("ʻ", "");
+    parkSearchCode = parkSearchCode.toLowerCase();
     // parkSearchCode = parkSearchCode.join("");
 
     $("#map-site").attr("href", "http://npmaps.com/" + parkSearchCode + "/")
@@ -589,9 +613,16 @@ function displayNatParkToDos(data) {
         //Add a photo of the first activity to the page
         toDoEl.textContent = "Recommended Activities";
         var imgEl = document.createElement("img");
+        let testimg = toDoArr[0];
+        // if(toDoArr[0].images[0])
         imgEl.src = toDoArr[0].images[0].url;
         imgEl.alt = toDoArr[0].images[0].altText;
         imgEl.setAttribute("style", "display:block; width:auto; height:450px");
+        // RETURN TO LATER FOR FIXING ACTIVITY PICS
+        if(imgEl.width<imgEl.height) {
+            console.log("this pic isn't perfect");
+        //     pickNewPic();
+        }
         toDoEl.setAttribute("style", "text-decoration:underline");
         toDoEl.append(imgEl);
     }
