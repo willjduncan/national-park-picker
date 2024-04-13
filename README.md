@@ -11,50 +11,6 @@ SO THAT I can plan a great vacation.
 
 National Park Picker is a platform made to explore and plan visits to National Parks within the USA. Fetching information from National Park Service APIs and a weather API, the completed website should allow the user to see the address, photos, activities, tours, and upcoming weather of all national parks, while also providing dynamic links to other useful websites. Furthermore, the website will have the ability to let users rank and save the national parks according to priority, and the home screen will display the user's favorites.
 
-Our job is to build the website so that:
-
-GIVEN a webpage that is incredible and sorts through national parks
-
-WHEN I check the HTML head
-
-THEN I find a link to a CSS framework other than Bootstrap 
-
-WHEN I check online
-
-THEN I see that the site has been deployed to GitHub Pages.
-
-WHEN I use the website
-
-THEN I find interactive elements to it (i.e., accepts and responds to user input).
-
-WHEN I view the Javascript
-
-THEN I find fetches from at least two server-side APIs.
-
-WHEN I am prompted with information or for user input
-
-THEN it is displayed in the form of modals
-
-WHEN I check client-side storage (i.e. localStorage)
-
-THEN I find saved elements that persist on the page
-
-WHEN I click buttons and links or hover over items
-
-THEN the website responds to it
-
-WHEN I view the website from different screen types
-
-THEN the website still works well and looks good
-
-WHEN I check the repository
-
-THEN I find that it meets quality coding standards (file structure, naming conventions, follows best practices for class/id naming conventions, indentation, quality comments, etc.)
-
-WHEN I look at the README file
-
-THEN I see quality in the flesh staring right back at me (with unique name, description, technologies used, screenshot, and link to deployed application).
-
 We began the project by picking our API's, CSS library, and creating a wireframe. Using the acquired API key, we found a way to first pull the basic national park information for one specific national park. Once that was possible, it was linked to a search button by using an array with all the park codes to substitute in the fetch. Once one fetch was made, it was fairly easy to add fetches for alerts, things to do, and tours as well. They each had to be displayed in their own div element to make sure each feature populated the right part of the screen regardless of load time. 
 
 From there, we added features to improve the website: autofill for the search bar, a photo slideshow at the top, and dynamic links to further resources. Next, we added the ability to save national parks according to priority, and then display the high priority parks to the homescreen. 
@@ -77,13 +33,7 @@ The link to the live website is below:
 
 ## Usage
 
-Screenshots are shown of the HTML, CSS, and JavaScript pages, all built from scratch.
-
-![screenshot of HTML](./assets/images/screenshot-html.png)
-![screenshot of CSS](./assets/images/screenshot-css.png)
-![screenshot of JavaScript](./assets/images/screenshot-js.png)
-
-Screenshots are also provided of the completed website at its load screen, and also mid-search. 
+Screenshots are provided of the completed website at its load screen, and also mid-search. 
 
 ![screenshot of the homepage](./assets/images/screenshot-homepage.png)
 
